@@ -1,3 +1,5 @@
+@use '../../styles/partials/mixins' as *;
+
 .header {
     padding: 1rem;
     width: 100%;
@@ -5,6 +7,12 @@
     justify-content: space-between;
     flex-direction: column;
     background-color: #295FCC;
+
+    @include tablet {
+        flex-direction: row;
+        align-items: center;
+        padding: 1rem 36px;
+    }
 
     &__wrapper {
         display: flex;
@@ -20,6 +28,8 @@
         position: relative;
 
 
+
+
         &,
         &::before,
         &::after {
@@ -28,6 +38,10 @@
             background-color: #ffffff;
             display: inline-block;
             transition: all .2s;
+
+            @include tablet {
+                display: none;
+            }
         }
 
         &::before,
@@ -65,16 +79,34 @@
 .navbar {
     display: none;
 
+    @include tablet {
+        display: flex;
+    }
+
     &__list {
         padding: 2rem;
         list-style: none;
         width: 100%;
+
+        @include tablet {
+            display: flex;
+            padding: 0;
+            width: auto;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     &__item {
         width: 100%;
         text-align: center;
         margin-bottom: 2rem;
+
+        @include tablet {
+            margin: 0;
+            width: auto;
+        }
     }
 
     &__link {
@@ -106,4 +138,8 @@
     line-height: 26px;
     letter-spacing: 0.5px;
     color: #1C1C1C;
+
+    @include tablet {
+        width: auto;
+    }
 }

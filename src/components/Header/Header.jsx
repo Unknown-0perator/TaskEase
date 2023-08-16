@@ -1,5 +1,4 @@
 import logo from '../../assets/logos/2.svg';
-import menuIcon from '../../assets/icons/menu.svg';
 
 import './Header.scss'
 import { useState } from 'react';
