@@ -1,0 +1,109 @@
+.header {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #295FCC;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        height: 38px;
+    }
+
+    &__menu {
+        position: relative;
+
+
+        &,
+        &::before,
+        &::after {
+            width: 2rem;
+            height: 2px;
+            background-color: #ffffff;
+            display: inline-block;
+            transition: all .2s;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        &::before {
+            top: -.6rem;
+        }
+
+        &::after {
+            top: .6rem;
+        }
+
+        &--close {
+            background-color: transparent;
+
+            &::before {
+                top: 0;
+                transform: rotate(135deg);
+            }
+
+            &::after {
+                top: 0;
+                transform: rotate(-135deg);
+            }
+        }
+    }
+
+}
+
+.navbar {
+    display: none;
+
+    &__list {
+        padding: 2rem;
+        list-style: none;
+        width: 100%;
+    }
+
+    &__item {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    &__link {
+        font-family: 'Urbanist';
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 26px;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+    }
+
+    &--close {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+    }
+}
+
+.button {
+    width: 100%;
+    padding: 8px;
+    background-color: #FDD943;
+    border: none;
+    border-radius: 4px;
+    font-family: Urbanist;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0.5px;
+    color: #1C1C1C;
+}
