@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
