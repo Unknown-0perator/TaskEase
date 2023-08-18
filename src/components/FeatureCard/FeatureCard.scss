@@ -1,0 +1,35 @@
+.card {
+    height: auto;
+    border-radius: 3px;
+    background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../../assets/images/sign_up.jpg);
+    background-size: cover;
+    background-blend-mode: screen;
+    font-family: "Urbanist";
+
+
+    &__side {
+        padding: 16px;
+
+        &--front {
+            color: #ffffff;
+            padding-top: 50px;
+        }
+
+        &--back {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+    }
+
+    &__heading {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 1rem;
+    }
+
+    &__detail {
+        font-size: 13px;
+    }
+}
