@@ -1,13 +1,19 @@
 import './App.scss';
 import Header from './components/Header/Header';
-import Banner from './components/Banner/Banner';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import LandingPage from './pages/LandingPage/LandingPage';
 
 function App() {
   return (
-    <div className="App">
+
+    <BrowserRouter>
       <Header />
-      <Banner />
-    </div>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
+
+    </BrowserRouter>
   );
 }
 
