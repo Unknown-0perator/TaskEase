@@ -14,6 +14,10 @@
         padding: 1rem 36px;
     }
 
+    @include desktop {
+        padding: 1rem 12vw;
+    }
+
     &__wrapper {
         display: flex;
         justify-content: space-between;
@@ -84,7 +88,7 @@
     }
 
     &__list {
-        padding: 2rem;
+        padding: 2rem 0 0;
         list-style: none;
         width: 100%;
 
@@ -111,11 +115,16 @@
 
     &__link {
         font-family: 'Urbanist';
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 26px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 18px;
         letter-spacing: 0.5px;
         color: #ffffff;
+
+        @include tablet {
+            font-size: 14px;
+            line-height: 22px;
+        }
     }
 
     &--close {
@@ -131,15 +140,22 @@
     background-color: #FDD943;
     border: none;
     border-radius: 4px;
-    font-family: Urbanist;
-    font-size: 13px;
-    font-style: normal;
+    font-family: 'Urbanist';
+    font-size: 10px;
     font-weight: 700;
-    line-height: 26px;
+    line-height: 20px;
     letter-spacing: 0.5px;
     color: #1C1C1C;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        background-color: #CAA610;
+        color: #ffffff;
+    }
 
     @include tablet {
         width: auto;
+        font-size: 12px;
     }
 }
