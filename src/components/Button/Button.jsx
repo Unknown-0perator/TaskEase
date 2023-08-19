@@ -3,6 +3,8 @@ import googleIcon from '../../assets/icons/Google Icon.svg';
 import { Link } from 'react-router-dom';
 import './Button.scss';
 
+
+//Button Primary
 export const ButtonPrimary = ({ text, color, to }) => {
     return (
         <Link to={to} className={`button button__primary button__primary--${color}`}>{text}</Link>

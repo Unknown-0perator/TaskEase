@@ -3,14 +3,6 @@ import logo from '../../assets/logos/1.svg';
 import { Link } from 'react-router-dom';
 
 
-export const AuthenticationContainer = () => {
-    return (
-        <div className="authentication">
-            <div className="authentication__container"></div>
-        </div>
-    )
-}
-
 export const AuthenticationHeader = ({ type }) => {
     let text = ''
     if (type === 'sign-up') {
@@ -26,9 +18,9 @@ export const AuthenticationHeader = ({ type }) => {
     )
 }
 
-export const FormInput = ({ placeholder, name }) => {
+export const FormInput = ({ placeholder, name, type }) => {
     return (
-        <input type="text" name={name} className="form__input" placeholder={placeholder} />
+        <input type={type} name={name} className="form__input" placeholder={placeholder} />
     )
 }
 
