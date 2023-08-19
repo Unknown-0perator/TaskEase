@@ -1,6 +1,4 @@
 import './SignUp.scss'
-import { Link } from 'react-router-dom';
-import logo from '../../assets/logos/1.svg';
 import { AuthenticationFooter, OrDivider, AuthenticationHeader, FormInput, Checkbox } from '../../components/AuthenticationComponents/AuthenticationComponents';
 import { ButtonAuthentication, ButtonGoogle } from '../../components/Button/Button';
 
@@ -14,7 +12,7 @@ const SignUp = () => {
                     <FormInput name='' placeholder='Last name' type='text' />
                     <FormInput name='' placeholder='Your email address' type='text' />
                     <FormInput name='' placeholder='Enter password' type='text' />
-                    <Checkbox />
+                    <Checkbox type='sign-up' />
                     <ButtonAuthentication text='Join Now' />
                 </div>
 

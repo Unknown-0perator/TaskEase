@@ -24,13 +24,27 @@ export const FormInput = ({ placeholder, name, type }) => {
     )
 }
 
-export const Checkbox = () => {
-    return (
-        <div className="form__checkbox">
-            <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' />
-            <label htmlFor="terms-conditions" className='form__checkbox__label'>I have read and agree to all <Link className='terms-conditions'>Terms & conditions</Link></label>
-        </div>
-    )
+export const Checkbox = ({ type }) => {
+    if (type === 'sign-up') {
+
+        return (
+            <div className="form__checkbox">
+                <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' />
+                <label htmlFor="terms-conditions" className='form__checkbox__label'>I have read and agree to all <Link className='terms-conditions'>Terms & conditions</Link></label>
+            </div>
+        )
+
+    }
+
+    if (type === 'login') {
+        return (
+            <div className="form__checkbox">
+                <input type="checkbox" name="remember_me" id="remember_me" className='form__checkbox__input' />
+                <label htmlFor="remember_me" className='form__checkbox__label'>Remember me</label>
+            </div>
+        )
+
+    }
 }
 
 export const OrDivider = () => {
