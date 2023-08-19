@@ -1,8 +1,8 @@
 import './SignUp.scss'
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logos/1.svg';
-import arrowIcon from '../../assets/icons/arrow.svg';
-import googleIcon from '../../assets/icons/Google Icon.svg';
+import { AuthenticationFooter, OrDivider } from '../../components/AuthenticationComponents/AuthenticationComponents';
+import { ButtonAuthentication, ButtonGoogle } from '../../components/Button/Button';
 
 const SignUp = () => {
     return (
@@ -21,17 +21,14 @@ const SignUp = () => {
                         <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' />
                         <label htmlFor="terms-conditions" className='form__checkbox__label'>I have read and agree to all <Link className='terms-conditions'>Terms & conditions</Link></label>
                     </div>
-                    <button className="button__submit">Join now <img src={arrowIcon} alt="" className="button__icon" /></button>
+                    <ButtonAuthentication text='Join Now' />
                 </div>
 
-                <p className="authentication__or">OR</p>
+                <OrDivider />
 
-                <button className="button__google"><img src={googleIcon} alt="" className="button__icon button__icon--google" />Sign in with Google</button>
+                <ButtonGoogle />
 
-                <div className="authentication__footer">
-                    <Link className='link link__primary'>Sign in today</Link>
-                    <Link className="link link__secondary">Lost password?</Link>
-                </div>
+                <AuthenticationFooter type='sign-up' />
             </div>
         </div>
     )

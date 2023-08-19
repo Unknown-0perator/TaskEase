@@ -120,50 +120,7 @@
     color: #3377FF;
 }
 
-.button {
 
-    &__submit {
-        display: flex;
-        width: 100%;
-        padding: 11px 24px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border-radius: 4px;
-        background-color: #295FCC;
-        color: #ffffff;
-        font-family: 'Urbanist';
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 26px;
-        letter-spacing: .5px;
-        border: none;
-    }
-
-    &__icon {
-
-        &--google {}
-    }
-
-    &__google {
-        display: flex;
-        width: 100%;
-        padding: 14px 24px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border: 1.5px solid #ddd;
-        background-color: #ffffff;
-        color: #0A0F26;
-        font-family: 'Urbanist';
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 26px;
-        letter-spacing: 0.5px;
-    }
-
-}
 
 .link {
     font-family: 'Urbanist';

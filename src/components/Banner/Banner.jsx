@@ -6,6 +6,7 @@ import vectorLeft from '../../assets/vectors/Vector_banner-left.svg';
 import treeLight from '../../assets/vectors/Tree_light.svg';
 import treeDark from '../../assets/vectors/Tree_dark.svg'
 import ellipse from '../../assets/vectors/Ellipse.svg';
+import { ButtonPrimary } from '../Button/Button';
 
 
 
@@ -16,8 +17,7 @@ const Banner = () => {
                 <h1 className="banner__heading">Post any <span className='banner__heading banner__heading--highlight'>task</span>.</h1>
                 <h1 className="banner__heading">Pick the <span className='banner__heading banner__heading--highlight'>best</span> person.</h1>
                 <h1 className="banner__heading">Get it <span className='banner__heading banner__heading--highlight'>done</span>.</h1>
-
-                <button className="button button--white">Post your task for free</button>
+                <ButtonPrimary text='post your task for free' color='white' />
             </div>
 
             <img src={vectorCenter} className='vector vector__center' alt="" />
