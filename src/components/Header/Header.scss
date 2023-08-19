@@ -96,9 +96,13 @@
             display: flex;
             padding: 0;
             width: auto;
-            gap: 2rem;
+            gap: 1.8rem;
             justify-content: center;
             align-items: center;
+        }
+
+        @include desktop {
+            gap: 2rem;
         }
     }
 
@@ -131,42 +135,5 @@
         display: flex;
         height: 100%;
         overflow: hidden;
-    }
-}
-
-.button {
-    width: 100%;
-    padding: 8px;
-    background-color: #FDD943;
-    border: none;
-    border-radius: 4px;
-    font-family: 'Urbanist';
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    color: #1C1C1C;
-    cursor: pointer;
-    transition: all .2s;
-
-    &:hover {
-        background-color: #ffffff;
-        color: #295FCC;
-    }
-
-    &--white {
-        background-color: #ffffff;
-        color: #295FCC;
-        border: 1px solid #295FCC;
-
-        &:hover {
-            background-color: #FDD943;
-            color: #1C1C1C;
-        }
-    }
-
-    @include tablet {
-        width: auto;
-        font-size: 12px;
     }
 }
