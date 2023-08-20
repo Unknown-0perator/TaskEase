@@ -19,7 +19,7 @@ const Header = () => {
             <nav className={menuOpen ? 'navbar navbar--close' : "navbar"}>
                 <ul className='navbar__list'>
                     <li className="navbar__item">
-                        <Link className="navbar__link">Browse tasks</Link>
+                        <Link to='tasks' className="navbar__link">Browse tasks</Link>
                     </li>
                     <li className="navbar__item">
                         <Link className="navbar__link">How it works</Link>

@@ -1,0 +1,99 @@
+@use '../../styles/partials/mixins' as *;
+
+.tasklist-container {
+    padding: 24px 16px;
+    background-color: #295FCC;
+    display: flex;
+    gap: 1rem;
+
+    @include tablet {
+        padding: 40px 36px;
+    }
+
+    @include desktop {
+        padding: 40px 12vw;
+    }
+}
+
+.tasklist {
+    list-style: none;
+    width: 100%;
+
+    @include tablet {
+        width: 40%;
+    }
+
+    &__item {}
+}
+
+.task {
+    background-color: #FFF;
+    border-radius: 4px;
+    padding: 1rem;
+    font-family: 'Urbanist';
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-weight: 600;
+    }
+
+    &__status {}
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-family: 'Open Sans';
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    &__detail-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__label {
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    &__info {
+        font-size: 13px;
+    }
+
+    &__user-profile-container {
+        border-radius: 100%;
+        width: 36px;
+        height: 36px;
+        background-color: #e1e1e1;
+    }
+
+    &__budget {
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+.map {
+    display: none;
+    border: 4px;
+
+    @include tablet {
+        display: block;
+        width: 60%;
+    }
+}
