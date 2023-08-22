@@ -18,6 +18,11 @@
         align-items: center;
         padding: 30px;
         border-radius: 4px;
+        width: 100%;
+
+        @include tablet {
+            width: 400px;
+        }
     }
 
     &__header {
