@@ -1,0 +1,25 @@
+@use '../../styles/partials/mixins' as *;
+
+.tag {
+    font-family: "Urbanist";
+    font-weight: 600;
+    font-size: 14px;
+
+    @include tablet {
+        font-size: 16px;
+    }
+
+
+    &--open {
+        color: #22c55e;
+    }
+
+    &--assigned {
+        color: #64748B;
+    }
+
+    &--completed {
+        color: #ef4444;
+    }
+
+}
