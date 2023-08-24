@@ -1,3 +1,5 @@
+@use '../../styles/partials/mixins' as *;
+
 .task {
     background-color: #FFF;
     border-radius: 4px;
@@ -10,6 +12,11 @@
     &__header {
         display: flex;
         justify-content: space-between;
+        font-size: 14px;
+
+        @include tablet {
+            font-size: 16px;
+        }
     }
 
     &__title {
@@ -37,12 +44,20 @@
     }
 
     &__label {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
+
+        @include tablet {
+            font-size: 11px;
+        }
     }
 
     &__info {
-        font-size: 13px;
+        font-size: 12px;
+
+        @include tablet {
+            font-size: 13px;
+        }
     }
 
     &__user-profile-container {
@@ -53,7 +68,11 @@
     }
 
     &__budget {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 700;
+
+        @include tablet {
+            font-size: 24px;
+        }
     }
 }
