@@ -18,18 +18,18 @@ export const AuthenticationHeader = ({ type }) => {
     )
 }
 
-export const FormInput = ({ placeholder, name, type }) => {
+export const FormInput = ({ placeholder, name, type, onChange }) => {
     return (
-        <input type={type} name={name} className="form__input" placeholder={placeholder} />
+        <input onChange={onChange} type={type} name={name} className="form__input" placeholder={placeholder} required />
     )
 }
 
-export const Checkbox = ({ type }) => {
+export const Checkbox = ({ type, required }) => {
     if (type === 'sign-up') {
 
         return (
             <div className="form__checkbox">
-                <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' />
+                <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' required={required} />
                 <label htmlFor="terms-conditions" className='form__checkbox__label'>I have read and agree to all <Link className='terms-conditions'>Terms & conditions</Link></label>
             </div>
         )
@@ -66,7 +66,7 @@ export const AuthenticationFooter = ({ type }) => {
     }
     return (
         <div className="authentication__footer">
-            <Link to={to} className='link link__primary'>{text}</Link>
+            <Link to={`../${to}`} className='link link__primary'>{text}</Link>
             <Link className="link link__secondary">Lost password?</Link>
         </div>
     )
