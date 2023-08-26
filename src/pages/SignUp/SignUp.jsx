@@ -2,8 +2,12 @@ import './SignUp.scss'
 import { AuthenticationFooter, OrDivider, AuthenticationHeader, FormInput, Checkbox } from '../../components/AuthenticationComponents/AuthenticationComponents';
 import { ButtonAuthentication, ButtonGoogle } from '../../components/Button/Button';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
+
+    let navigate = useNavigate();
 
     const [signUpForm, setSignUpForm] = useState({
         f_name: '',
@@ -16,12 +20,22 @@ const SignUp = () => {
         setSignUpForm({
             ...signUpForm, [event.target.name]: event.target.value
         })
-        console.log(event.target.value)
+        console.log(`${event.target.name}:${event.target.value}`)
     }
 
+    const API_URL = process.env.REACT_APP_BACKEND_URL;
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log('submitted')
+        axios.post(`${API_URL}/user/sign-up`, {
+            f_name: signUpForm.f_name,
+            l_name: signUpForm.l_name,
+            email: signUpForm.email,
+            password: signUpForm.password
+        })
+
+        alert('user created successfully')
+        setSignUpForm('')
+        navigate('/')
     }
 
     return (
