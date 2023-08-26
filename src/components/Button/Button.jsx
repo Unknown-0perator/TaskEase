@@ -12,9 +12,9 @@ export const ButtonPrimary = ({ text, color, to }) => {
 }
 
 // Button for Login and Sign up
-export const ButtonAuthentication = ({ text }) => {
+export const ButtonAuthentication = ({ text, type }) => {
     return (
-        <button className="button button__submit">{text} <img src={arrowIcon} alt="" className="button__icon" /></button>
+        <button type={type} className="button button__submit">{text} <img src={arrowIcon} alt="" className="button__icon" /></button>
     )
 }
 

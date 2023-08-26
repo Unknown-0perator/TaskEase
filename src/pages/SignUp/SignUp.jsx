@@ -1,20 +1,55 @@
 import './SignUp.scss'
 import { AuthenticationFooter, OrDivider, AuthenticationHeader, FormInput, Checkbox } from '../../components/AuthenticationComponents/AuthenticationComponents';
 import { ButtonAuthentication, ButtonGoogle } from '../../components/Button/Button';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
+
+    let navigate = useNavigate();
+
+    const [signUpForm, setSignUpForm] = useState({
+        f_name: '',
+        l_name: '',
+        email: '',
+        password: ''
+    })
+
+    const handleInputChange = (event) => {
+        setSignUpForm({
+            ...signUpForm, [event.target.name]: event.target.value
+        })
+        console.log(`${event.target.name}:${event.target.value}`)
+    }
+
+    const API_URL = process.env.REACT_APP_BACKEND_URL;
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        axios.post(`${API_URL}/user/sign-up`, {
+            f_name: signUpForm.f_name,
+            l_name: signUpForm.l_name,
+            email: signUpForm.email,
+            password: signUpForm.password
+        })
+
+        alert('user created successfully')
+        setSignUpForm('')
+        navigate('/')
+    }
+
     return (
         <div className="authentication">
             <div className="authentication__container">
                 <AuthenticationHeader type='sign-up' />
-                <div className="form">
-                    <FormInput name='' placeholder='First name' type='text' />
-                    <FormInput name='' placeholder='Last name' type='text' />
-                    <FormInput name='' placeholder='Your email address' type='text' />
-                    <FormInput name='' placeholder='Enter password' type='text' />
+                <form className="form" onSubmit={handleFormSubmit}>
+                    <FormInput onChange={handleInputChange} name='f_name' placeholder='First name' type='text' />
+                    <FormInput onChange={handleInputChange} name='l_name' placeholder='Last name' type='text' />
+                    <FormInput onChange={handleInputChange} name='email' placeholder='Your email address' type='email' />
+                    <FormInput onChange={handleInputChange} name='password' placeholder='Enter password' type='password' />
                     <Checkbox type='sign-up' />
-                    <ButtonAuthentication text='Join Now' />
-                </div>
+                    <ButtonAuthentication text='Join Now' type="submit" />
+                </form>
 
                 <OrDivider />
 
