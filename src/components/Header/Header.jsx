@@ -5,9 +5,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonPrimary } from '../Button/Button';
 
-const Header = () => {
+const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
+    console.log(profileData)
 
     const [menuOpen, setMenuOpen] = useState(false)
+    const logout = () => {
+        sessionStorage.removeItem('authToken');
+        setIsLoggedIn(false)
+    }
+
     return (
         <header className="header">
             <div className="header__wrapper">
@@ -17,23 +23,45 @@ const Header = () => {
                 }}></div>
             </div>
             <nav className={menuOpen ? 'navbar navbar--close' : "navbar"}>
-                <ul className='navbar__list'>
-                    <li className="navbar__item">
-                        <Link to='tasks' className="navbar__link">Browse tasks</Link>
-                    </li>
-                    <li className="navbar__item">
-                        <Link className="navbar__link">How it works</Link>
-                    </li>
-                    <li className="navbar__item">
-                        <Link to='sign-up' className="navbar__link">Sign up</Link>
-                    </li>
-                    <li className="navbar__item">
-                        <Link to='login' className="navbar__link">Log in</Link>
-                    </li>
-                    <li className="navbar__item">
-                        <ButtonPrimary text='Become a task helper' color='yellow' />
-                    </li>
-                </ul>
+                {!isLoggedIn ? (
+                    <ul className='navbar__list'>
+
+                        <li className="navbar__item">
+                            <Link to='tasks' className="navbar__link">Browse tasks</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link className="navbar__link">How it works</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link to='sign-up' className="navbar__link">Sign up</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link to='login' className="navbar__link">Log in</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <ButtonPrimary text='Become a task helper' color='yellow' />
+                        </li>
+
+                    </ul>
+                ) : (
+                    <ul className="navbar__list">
+                        <li className="navbar__item">
+                            <Link to='tasks' className="navbar__link">Browse tasks</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link className="navbar__link">My tasks</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link to='sign-up' className="navbar__link">Post a task</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <Link to='sign-up' className="navbar__link">Profile</Link>
+                        </li>
+                        <li className="navbar__item">
+                            <ButtonPrimary text='Logout' onClick={logout} color='yellow' />
+                        </li>
+                    </ul>
+                )}
             </nav>
         </header>
     )

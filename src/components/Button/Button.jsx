@@ -5,9 +5,9 @@ import './Button.scss';
 
 
 //Button Primary
-export const ButtonPrimary = ({ text, color, to }) => {
+export const ButtonPrimary = ({ text, color, to, onClick }) => {
     return (
-        <Link to={to} className={`button button__primary button__primary--${color}`}>{text}</Link>
+        <Link to={to} onClick={onClick} className={`button button__primary button__primary--${color}`}>{text}</Link>
     )
 }
 
