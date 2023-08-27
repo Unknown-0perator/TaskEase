@@ -18,10 +18,10 @@ function App() {
 
 
   useEffect(() => {
-    if (!sessionStorage.bearerToken) {
+    if (!sessionStorage.authToken) {
       return;
     }
-    const authorization = { headers: { Authorization: sessionStorage.bearerToken } };
+    const authorization = { headers: { Authorization: sessionStorage.authToken } };
     axios.get(`${API_URL}/user/profile`, authorization)
       .then(({ data }) => {
         setIsLoggedIn(true);
