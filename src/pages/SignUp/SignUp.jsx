@@ -31,6 +31,8 @@ const SignUp = () => {
             l_name: signUpForm.l_name,
             email: signUpForm.email,
             password: signUpForm.password
+        }).catch((e) => {
+            console.log(e)
         })
 
         alert('user created successfully')
