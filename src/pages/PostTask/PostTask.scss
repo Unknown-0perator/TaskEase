@@ -1,0 +1,182 @@
+@use '../../styles/partials/mixins' as *;
+
+.post-task {
+    background-color: #295fcc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    height: calc(100vh - 70px);
+
+    &__sidebar {
+        display: none;
+
+        &__list {}
+
+        &__item {}
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        border-radius: 4px;
+        width: 100%;
+
+        // @include tablet {
+        //     width: 400px;
+        // }
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+    }
+
+    &__logo {
+        height: 38px;
+    }
+
+    &__heading {
+        font-family: Urbanist;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 26px;
+        letter-spacing: 0.5px;
+        color: #1C1C1C;
+        text-align: center;
+    }
+
+    &__form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        font-family: 'Urbanist';
+
+        &__group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        &__label {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+
+        &__input-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        &__input {
+            font-family: 'Open Sans';
+            font-size: 13px;
+            line-height: 18px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            outline: none;
+
+            &:focus {
+                outline: 1px solid #295FCC;
+            }
+
+            @include tablet {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            &--half {
+                width: 50%;
+            }
+
+            &--textarea {
+                height: 150px;
+                resize: none;
+            }
+        }
+
+        &__checkbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+
+            &__label {
+                font-size: 14px;
+                font-weight: 600;
+
+            }
+
+            &__input {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    &__button-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+    }
+
+    &__button {
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: 18px;
+        font-family: 'Urbanist';
+        font-weight: 600;
+        letter-spacing: .5px;
+        cursor: pointer;
+
+        &--submit {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: #295FCC;
+            color: #ffffff;
+        }
+
+        &--cancel {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: #ffffff;
+            color: #1C1C1C;
+            border: #1C1C1C 1px solid;
+        }
+
+        &--half {
+            width: 50%;
+        }
+    }
+
+
+}
