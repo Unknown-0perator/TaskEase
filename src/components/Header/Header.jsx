@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import { ButtonPrimary } from '../Button/Button';
 
 const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
-    console.log(profileData)
-
     const [menuOpen, setMenuOpen] = useState(false)
     const logout = () => {
         sessionStorage.removeItem('authToken');
@@ -52,7 +50,7 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                             <Link className="navbar__link">My tasks</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='sign-up' className="navbar__link">Post a task</Link>
+                            <Link to='post-task' className="navbar__link">Post a task</Link>
                         </li>
                         <li className="navbar__item">
                             <Link to='sign-up' className="navbar__link">Profile</Link>

@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import TaskList from './pages/TaskList/TaskList';
+import PostTask from './pages/PostTask/PostTask';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='sign-up' element={<SignUp />} />
         <Route path='login' element={<Login isLoggedIn={isLoggedIn} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='tasks' element={<TaskList />} />
+        <Route path='post-task' element={<PostTask profileData={profileData} />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
 
