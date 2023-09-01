@@ -28,6 +28,19 @@ const backClick = (refArray, previousPage, sideRefArray, previousSideBar) => {
     previousPage.current.classList.remove('post-task__container--hidden')
 }
 
+const sideBarClick = (refArray, currentPage, sideRefArray, currentSidebar) => {
+    sideRefArray.map(ref => {
+        ref.current.classList.remove('post-task__sidebar__item--active')
+    })
+    currentSidebar.current.classList.add('post-task__sidebar__item--active')
+
+    refArray.map(ref => {
+        ref.current.classList.add('post-task__container--hidden')
+    })
+    currentPage.current.classList.remove('post-task__container--hidden')
+}
+
+
 
 const PostTask = () => {
 
@@ -50,10 +63,22 @@ const PostTask = () => {
         <div className="post-task">
             <sidebar className="post-task__sidebar">
                 <ul className="post-task__sidebar__list">
-                    <li ref={sideTitleDateRef} className="post-task__sidebar__item post-task__sidebar__item--active"><a href="" className="post-task__sidebar__link">Title and Date</a> </li>
-                    <li ref={sideLocationRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Location</a> </li>
-                    <li ref={sideDetailRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Details</a> </li>
-                    <li ref={sideBudgetRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Budget</a> </li>
+                    <li onClick={(e) => {
+                        e.preventDefault();
+                        sideBarClick(refArray, titleDateRef, sideRefArray, sideTitleDateRef)
+                    }} ref={sideTitleDateRef} className="post-task__sidebar__item post-task__sidebar__item--active"><a href="" className="post-task__sidebar__link">Title and Date</a> </li>
+                    <li onClick={(e) => {
+                        e.preventDefault();
+                        sideBarClick(refArray, locationRef, sideRefArray, sideLocationRef)
+                    }} ref={sideLocationRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Location</a> </li>
+                    <li onClick={(e) => {
+                        e.preventDefault();
+                        sideBarClick(refArray, detailRef, sideRefArray, sideDetailRef)
+                    }} ref={sideDetailRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Details</a> </li>
+                    <li onClick={(e) => {
+                        e.preventDefault();
+                        sideBarClick(refArray, budgetRef, sideRefArray, sideBudgetRef)
+                    }} ref={sideBudgetRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Budget</a> </li>
                 </ul>
             </sidebar>
 
