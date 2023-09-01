@@ -4,7 +4,11 @@ import arrowIcon from '../../assets/icons/arrow.svg';
 import { OrDivider } from '../../components/AuthenticationComponents/AuthenticationComponents';
 import { useRef } from 'react';
 
-const nextClick = (refArray, nextPage) => {
+const nextClick = (refArray, nextPage, sideRefArray, nextSideBar) => {
+    sideRefArray.map(ref => {
+        ref.current.classList.remove('post-task__sidebar__item--active')
+    })
+    nextSideBar.current.classList.add('post-task__sidebar__item--active')
 
     refArray.map(ref => {
         ref.current.classList.add('post-task__container--hidden')
@@ -12,7 +16,11 @@ const nextClick = (refArray, nextPage) => {
     nextPage.current.classList.remove('post-task__container--hidden')
 }
 
-const backClick = (refArray, previousPage) => {
+const backClick = (refArray, previousPage, sideRefArray, previousSideBar) => {
+    sideRefArray.map(ref => {
+        ref.current.classList.remove('post-task__sidebar__item--active')
+    })
+    previousSideBar.current.classList.add('post-task__sidebar__item--active')
 
     refArray.map(ref => {
         ref.current.classList.add('post-task__container--hidden')
@@ -23,21 +31,29 @@ const backClick = (refArray, previousPage) => {
 
 const PostTask = () => {
 
+
+
     const titleDateRef = useRef();
     const locationRef = useRef();
     const detailRef = useRef();
     const budgetRef = useRef();
+    const sideTitleDateRef = useRef();
+    const sideLocationRef = useRef();
+    const sideDetailRef = useRef();
+    const sideBudgetRef = useRef();
 
     const refArray = [titleDateRef, locationRef, detailRef, budgetRef]
+    const sideRefArray = [sideTitleDateRef, sideLocationRef, sideDetailRef, sideBudgetRef]
+
 
     return (
         <div className="post-task">
             <sidebar className="post-task__sidebar">
                 <ul className="post-task__sidebar__list">
-                    <li className="post-task__sidebar__item">Title and Date</li>
-                    <li className="post-task__sidebar__item">Location</li>
-                    <li className="post-task__sidebar__item">Details</li>
-                    <li className="post-task__sidebar__item">Budget</li>
+                    <li ref={sideTitleDateRef} className="post-task__sidebar__item post-task__sidebar__item--active"><a href="" className="post-task__sidebar__link">Title and Date</a> </li>
+                    <li ref={sideLocationRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Location</a> </li>
+                    <li ref={sideDetailRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Details</a> </li>
+                    <li ref={sideBudgetRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Budget</a> </li>
                 </ul>
             </sidebar>
 
@@ -66,7 +82,7 @@ const PostTask = () => {
                     </div>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        nextClick(refArray, locationRef)
+                        nextClick(refArray, locationRef, sideRefArray, sideLocationRef)
                     }} className="post-task__button post-task__button--submit">Next <img src={arrowIcon} alt="" className="button__icon" /></button>
 
                 </form>
@@ -109,11 +125,11 @@ const PostTask = () => {
                     <div className="post-task__button-container">
                         <button onClick={(e) => {
                             e.preventDefault();
-                            backClick(refArray, titleDateRef)
+                            backClick(refArray, titleDateRef, sideRefArray, sideTitleDateRef)
                         }} className="post-task__button post-task__button--cancel">Back</button>
                         <button onClick={(e) => {
                             e.preventDefault();
-                            nextClick(refArray, detailRef)
+                            nextClick(refArray, detailRef, sideRefArray, sideDetailRef)
                         }} className="post-task__button post-task__button--submit">Next <img src={arrowIcon} alt="" className="button__icon" /></button>
                     </div>
                 </form>
@@ -142,11 +158,11 @@ const PostTask = () => {
                     <div className="post-task__button-container">
                         <button onClick={(e) => {
                             e.preventDefault();
-                            backClick(refArray, locationRef)
+                            backClick(refArray, locationRef, sideRefArray, sideLocationRef)
                         }} className="post-task__button post-task__button--cancel">Back</button>
                         <button onClick={(e) => {
                             e.preventDefault();
-                            nextClick(refArray, budgetRef)
+                            nextClick(refArray, budgetRef, sideRefArray, sideBudgetRef)
                         }} className="post-task__button post-task__button--submit">Next <img src={arrowIcon} alt="" className="button__icon" /></button>
                     </div>
                 </form>
@@ -174,7 +190,7 @@ const PostTask = () => {
                     <div className="post-task__button-container">
                         <button onClick={(e) => {
                             e.preventDefault();
-                            backClick(refArray, detailRef)
+                            backClick(refArray, detailRef, sideRefArray, sideDetailRef)
                         }} className="post-task__button post-task__button--cancel">Back</button>
                         <button className="post-task__button post-task__button--submit">Post the task <img src={arrowIcon} alt="" className="button__icon" /></button>
                     </div>
