@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Task from '../../components/Task/Task';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const TaskList = () => {
 
@@ -21,9 +22,9 @@ const TaskList = () => {
             <ul className="tasklist">
                 {taskList.map((task) => {
                     return (
-                        <li className="tasklist__item" key={task.id}>
+                        <Link to={`/tasks/${task.id}`} className="tasklist__item" key={task.id}>
                             <Task task={task} />
-                        </li>
+                        </Link>
                     )
                 })}
 
