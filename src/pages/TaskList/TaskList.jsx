@@ -11,9 +11,10 @@ const TaskList = () => {
     const API_URL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
-        axios.get(`${API_URL}/task`).then(response => {
+        axios.get(`${API_URL}/tasks`).then(response => {
             setTaskList(response.data)
         })
+
     }, [API_URL])
 
 
@@ -22,25 +23,26 @@ const TaskList = () => {
             <ul className="tasklist">
                 {taskList.map((task) => {
                     return (
-                        <Link to={`/tasks/${task.id}`} className="tasklist__item" key={task.id}>
+                        <Link to={`/tasks/${task.task_id}`} className="tasklist__item" key={task.task_id}>
                             <Task task={task} />
                         </Link>
                     )
                 })}
-
-
-
             </ul>
-            <MapContainer className='map' center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+
+            <MapContainer className='map' center={taskList.length > 0 ? [taskList[0].latitude, taskList[0].longitude] : [51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                {taskList.map((task) => (
+                    <Marker position={[task.latitude, task.longitude]} key={task.task_id}>
+                        <Popup className='popup'>
+                            <p className="popup__heading">{task.title}</p>
+                            <button className="popup__button">View Task</button>
+                        </Popup>
+                    </Marker>
+                ))}
             </MapContainer>
         </section>
     )

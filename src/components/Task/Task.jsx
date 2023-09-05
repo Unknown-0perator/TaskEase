@@ -24,7 +24,7 @@ const Task = ({ task }) => {
             </div>
             <div className="task__footer">
                 <div className="task__user-profile-container"></div>
-                <div className="task__budget">{`$${task.budget}`}</div>
+                <div className="task__budget">{`CAD ${task.budget}`}</div>
             </div>
         </div>
     )

@@ -41,7 +41,7 @@ function App() {
         <Route path='sign-up' element={<SignUp />} />
         <Route path='login' element={<Login isLoggedIn={isLoggedIn} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='tasks' element={<TaskList />} />
-        <Route path='tasks/:id' element={<TaskDetail />} />
+        <Route path='tasks/:taskId' element={<TaskDetail API_URL={API_URL} />} />
         <Route path='post-task' element={<PostTask profileData={profileData} />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
