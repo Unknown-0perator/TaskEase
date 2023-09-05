@@ -3,6 +3,7 @@ import Tag from '../../components/Tag/Tag';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { displayDate } from '../../utilities/utilities';
 
 
 
@@ -114,7 +115,7 @@ const TaskDetail = ({ API_URL }) => {
                                         <div className="comment__wrapper">
                                             <div className="comment__header">
                                                 <p className="comment__user">{`${comment.first_name} ${comment.last_name}`}</p>
-                                                <p className="comment__date">{comment.timestamp}</p>
+                                                <p className="comment__date">{displayDate(comment.timestamp)}</p>
                                             </div>
                                             <p className="comment__text">{comment.comment_text}</p>
                                         </div>
