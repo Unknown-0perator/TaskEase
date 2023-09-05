@@ -3,6 +3,7 @@ import Tag from '../../components/Tag/Tag';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { displayDate } from '../../utilities/utilities';
 
 
 
@@ -54,7 +55,7 @@ const TaskDetail = ({ API_URL }) => {
                                     </div>
                                     <div className="task-detail__info">
                                         <p className="task-detail__title">Date</p>
-                                        <p className="task-detail__content">Wed, Sep 5th</p>
+                                        <p className="task-detail__content">{taskDetail.flexible === 1 ? `Flexible` : displayDate(taskDetail.date, 'dayFormat')}</p>
                                     </div>
                                 </div>
                                 <div className="task-detail__group">
@@ -114,7 +115,7 @@ const TaskDetail = ({ API_URL }) => {
                                         <div className="comment__wrapper">
                                             <div className="comment__header">
                                                 <p className="comment__user">{`${comment.first_name} ${comment.last_name}`}</p>
-                                                <p className="comment__date">{comment.timestamp}</p>
+                                                <p className="comment__date">{displayDate(comment.timestamp)}</p>
                                             </div>
                                             <p className="comment__text">{comment.comment_text}</p>
                                         </div>

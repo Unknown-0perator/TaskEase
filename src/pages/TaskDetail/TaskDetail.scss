@@ -24,6 +24,10 @@
     font-family: 'Urbanist';
     color: #1c1c1c;
 
+    @include tablet {
+        padding: 40px;
+    }
+
 
 
     &__heading {
@@ -140,7 +144,7 @@
         flex-direction: row;
         gap: 2rem;
         align-items: flex-start;
-        justify-content: center;
+        justify-content: space-between;
     }
 }
 
