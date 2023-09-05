@@ -55,7 +55,7 @@ const TaskDetail = ({ API_URL }) => {
                                     </div>
                                     <div className="task-detail__info">
                                         <p className="task-detail__title">Date</p>
-                                        <p className="task-detail__content">Wed, Sep 5th</p>
+                                        <p className="task-detail__content">{taskDetail.flexible === 1 ? `Flexible` : displayDate(taskDetail.date, 'dayFormat')}</p>
                                     </div>
                                 </div>
                                 <div className="task-detail__group">

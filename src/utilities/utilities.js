@@ -1,4 +1,20 @@
-export const displayDate = (dateInput) => {
+const dayFormatter = (day) => {
+        const dayLastDigit = day.toString().split();
+        if(dayLastDigit[dayLastDigit.length - 1] === '1'){
+            return `${day}st`
+        } else if(dayLastDigit[dayLastDigit.length - 1] === '2'){
+            return `${day}nd`
+        } else if(dayLastDigit[dayLastDigit.length - 1] === '2'){
+            return `${day}rd`
+        } else {
+            return `${day}th`
+        }
+    }
+
+export const displayDate = (dateInput, type) => {
+
+    
+
     let currentDate = new Date();
 	let currentDay = currentDate.getDate();
 	let currentMonth = currentDate.getMonth() + 1;
@@ -7,11 +23,22 @@ export const displayDate = (dateInput) => {
 	let currentMinute = currentDate.getMinutes();
 
     let timeStamp = new Date(dateInput);
+    let weekday = timeStamp.getDay();
     let day = timeStamp.getDate();
     let month = timeStamp.getMonth() + 1;
+    let monthIndex = timeStamp.getMonth();
     let year = timeStamp.getFullYear();
     let hour = timeStamp.getHours();
 	let minute = timeStamp.getMinutes(); 
+
+    if(type === 'dayFormat' && currentYear === year){
+
+        
+
+        const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return `${weekDays[weekday]}, ${months[monthIndex]} ${dayFormatter(day)}`
+    }
 
     if(year === currentYear && month === currentMonth && day === currentDay && hour === currentHour && minute === currentMinute){
         return 'Now';
