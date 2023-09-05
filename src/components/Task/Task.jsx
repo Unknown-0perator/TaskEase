@@ -1,5 +1,6 @@
 import './Task.scss';
 import Tag from '../Tag/Tag';
+import { displayDate } from '../../utilities/utilities';
 
 const Task = ({ task }) => {
     return (
@@ -11,7 +12,7 @@ const Task = ({ task }) => {
             <div className="task__body">
                 <div className="task__detail-group">
                     <p className="task__label">Date</p>
-                    <p className="task__info">{task.date}</p>
+                    <p className="task__info">{task.flexible === 1 ? `Flexible` : displayDate(task.date, 'dayFormat')}</p>
                 </div>
                 <div className="task__detail-group">
                     <p className="task__label">Location</p>
