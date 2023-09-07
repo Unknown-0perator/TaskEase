@@ -10,8 +10,8 @@ const SignUp = () => {
     let navigate = useNavigate();
 
     const [signUpForm, setSignUpForm] = useState({
-        f_name: '',
-        l_name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: ''
     })
@@ -26,9 +26,9 @@ const SignUp = () => {
     const API_URL = process.env.REACT_APP_BACKEND_URL;
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        axios.post(`${API_URL}/user/sign-up`, {
-            f_name: signUpForm.f_name,
-            l_name: signUpForm.l_name,
+        axios.post(`${API_URL}/users/sign-up`, {
+            first_name: signUpForm.first_name,
+            last_name: signUpForm.last_name,
             email: signUpForm.email,
             password: signUpForm.password
         }).catch((e) => {
@@ -45,8 +45,8 @@ const SignUp = () => {
             <div className="authentication__container">
                 <AuthenticationHeader type='sign-up' />
                 <form className="form" onSubmit={handleFormSubmit}>
-                    <FormInput onChange={handleInputChange} name='f_name' placeholder='First name' type='text' />
-                    <FormInput onChange={handleInputChange} name='l_name' placeholder='Last name' type='text' />
+                    <FormInput onChange={handleInputChange} name='first_name' placeholder='First name' type='text' />
+                    <FormInput onChange={handleInputChange} name='last_name' placeholder='Last name' type='text' />
                     <FormInput onChange={handleInputChange} name='email' placeholder='Your email address' type='email' />
                     <FormInput onChange={handleInputChange} name='password' placeholder='Enter password' type='password' />
                     <Checkbox type='sign-up' />

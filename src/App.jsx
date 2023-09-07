@@ -25,7 +25,7 @@ function App() {
       return;
     }
     const authorization = { headers: { Authorization: sessionStorage.authToken } };
-    axios.get(`${API_URL}/user/profile`, authorization)
+    axios.get(`${API_URL}/auth/profile`, authorization)
       .then(({ data }) => {
         setIsLoggedIn(true);
         setProfileData(data)
