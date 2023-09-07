@@ -24,7 +24,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        axios.post(`${API_URL}/user/login`, {
+        axios.post(`${API_URL}/auth/login`, {
             email: loginForm.email,
             password: loginForm.password
         }).then((response) => {
