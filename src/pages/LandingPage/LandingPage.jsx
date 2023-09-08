@@ -7,7 +7,7 @@ import { ButtonPrimary } from '../../components/Button/Button';
 
 const LandingPage = () => {
     return (
-        <div>
+        <div className='margin-header'>
             <Banner />
             {/* <Feature /> */}
             <section className="about">

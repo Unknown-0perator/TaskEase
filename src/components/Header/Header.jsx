@@ -25,24 +25,24 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                     <ul className='navbar__list'>
 
                         <li className="navbar__item">
-                            <Link to='tasks' className="navbar__link">Browse tasks</Link>
+                            <Link to='/' className="navbar__link">Home</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link className="navbar__link">How it works</Link>
-                        </li>
-                        <li className="navbar__item">
-                            <Link to='sign-up' className="navbar__link">Sign up</Link>
+                            <Link to='/tasks' className="navbar__link">Browse Tasks</Link>
                         </li>
                         <li className="navbar__item">
                             <Link to='login' className="navbar__link">Log in</Link>
                         </li>
                         <li className="navbar__item">
-                            <ButtonPrimary text='Become a task helper' color='yellow' />
+                            <ButtonPrimary to='/sign-up' text='Sign Up' color='yellow' />
                         </li>
 
                     </ul>
                 ) : (
                     <ul className="navbar__list">
+                        <li className="navbar__item">
+                            <Link to='/' className="navbar__link">Home</Link>
+                        </li>
                         <li className="navbar__item">
                             <Link to='tasks' className="navbar__link">Browse tasks</Link>
                         </li>

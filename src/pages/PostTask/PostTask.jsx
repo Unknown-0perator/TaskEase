@@ -102,7 +102,7 @@ const PostTask = () => {
 
 
     return (
-        <div className="post-task">
+        <div className="post-task margin-header">
             <sidebar className="post-task__sidebar">
                 <ul className="post-task__sidebar__list">
                     <li onClick={(e) => {

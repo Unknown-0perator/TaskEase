@@ -22,7 +22,7 @@ const TaskDetail = ({ API_URL }) => {
     }, [])
 
     return (
-        <div className="task-detail-container">
+        <div className="task-detail-container margin-header">
             <div className="task-detail">
                 {taskDetail ? (
                     <>

@@ -49,7 +49,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
         <div>
             {!isLoggedIn ? (
 
-                <div className="authentication">
+                <div className="authentication margin-header">
                     <div className="authentication__container">
                         <AuthenticationHeader type='login' />
                         <form className="form" onSubmit={handleFormSubmit}>
