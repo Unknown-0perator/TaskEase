@@ -161,6 +161,7 @@
         flex-direction: row;
         margin-top: 5rem;
         padding: 24px 36px;
+        margin-bottom: 6rem;
     }
 
     @include desktop {
@@ -251,5 +252,18 @@
         font-size: 14px;
         line-height: 24px;
         margin-bottom: 1.5rem;
+    }
+}
+
+.footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        font-family: 'Open Sans';
+        font-size: 11px;
+
     }
 }
