@@ -41,7 +41,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="authentication">
+        <div className="authentication margin-header">
             <div className="authentication__container">
                 <AuthenticationHeader type='sign-up' />
                 <form className="form" onSubmit={handleFormSubmit}>

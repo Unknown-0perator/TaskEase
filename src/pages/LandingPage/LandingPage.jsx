@@ -1,16 +1,13 @@
 import './LandingPage.scss'
 import Banner from '../../components/Banner/Banner';
-import Feature from '../../components/Feature/Feature';
-import aboutImg1 from '../../assets/images/gardening.jpg';
-import aboutImg2 from '../../assets/images/moving.jpg';
-import aboutImg3 from '../../assets/images/renovation.jpg';
 import number1 from '../../assets/vectors/1.svg';
 import number2 from '../../assets/vectors/2.svg';
 import number3 from '../../assets/vectors/3.svg';
+import { ButtonPrimary } from '../../components/Button/Button';
 
 const LandingPage = () => {
     return (
-        <div>
+        <div className='margin-header'>
             <Banner />
             {/* <Feature /> */}
             <section className="about">
@@ -47,6 +44,30 @@ const LandingPage = () => {
 
                 </div>
             </section>
+            <section className="advantage">
+                <div className="advantage__card-container">
+                    <div className="advantage__card advantage__card--1">
+                        <h3 className="advantage__card-heading">Efficiency and Convenience</h3>
+                        <p className="advantage__card-content">Streamlined task assistance for quick, stress-free help.</p>
+                    </div>
+                    <div className="advantage__card advantage__card--2">
+                        <h3 className="advantage__card-heading">Flexibility for Task Helpers</h3>
+                        <p className="advantage__card-content">Earning opportunities on your terms.</p>
+                    </div>
+                    <div className="advantage__card advantage__card--3">
+                        <h3 className="advantage__card-heading">Trust and Safety</h3>
+                        <p className="advantage__card-content">Verified profiles, accountable reviews.</p>
+                    </div>
+                </div>
+                <div className="advantage__text-container">
+                    <h2 className="advantage__text-heading">Get Started Today</h2>
+                    <p className="advantage__text-content">Join TaskEase today and experience the convenience of finding help or offering your assistance for short-term tasks. Sign up now and simplify your life with TaskEase!</p>
+                    <ButtonPrimary text='Join now' color='yellow' />
+                </div>
+            </section>
+
+
+
         </div>
     )
 }

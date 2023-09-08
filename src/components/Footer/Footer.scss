@@ -1,0 +1,14 @@
+.footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #295FCC;
+
+    &__content {
+        font-family: 'Open Sans';
+        font-size: 11px;
+        color: #fff;
+
+    }
+}

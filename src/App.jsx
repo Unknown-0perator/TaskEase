@@ -9,6 +9,7 @@ import PostTask from './pages/PostTask/PostTask';
 import TaskDetail from './pages/TaskDetail/TaskDetail';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
         <Route path='post-task' element={<PostTask profileData={profileData} />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
-
+      <Footer />
     </BrowserRouter>
   );
 }
