@@ -66,9 +66,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <footer className="footer">
-                <p className="footer__content"> © Copyright 2015 Company Name. All rights reserved.</p>
-            </footer>
+
 
         </div>
     )
