@@ -2,7 +2,8 @@ import './PostTask.scss';
 import logo from '../../assets/logos/1.svg';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import { OrDivider } from '../../components/AuthenticationComponents/AuthenticationComponents';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import axios from 'axios';
 
 const nextClick = (refArray, nextPage, sideRefArray, nextSideBar) => {
     sideRefArray.map(ref => {
@@ -59,6 +60,47 @@ const PostTask = () => {
     const sideRefArray = [sideTitleDateRef, sideLocationRef, sideDetailRef, sideBudgetRef]
 
 
+    const [taskPostForm, setTaskPostForm] = useState({
+        title: '',
+        description: '',
+        budget: '',
+        type: '',
+        date: '',
+        time: '',
+        flexible: '',
+        poster_id: ''
+    })
+
+    const handleInputChange = (event) => {
+        setTaskPostForm({
+            ...taskPostForm, [event.target.name]: event.target.value
+        })
+        console.log(`${event.target.name}:${event.target.value}`)
+    }
+
+    const API_URL = process.env.REACT_APP_BACKEND_URL;
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        axios.post(`${API_URL}/tasks`, {
+            title: taskPostForm.task_title,
+            description: taskPostForm.task_details,
+            budget: taskPostForm.task_budget,
+            type: taskPostForm.task_type,
+            date: taskPostForm.task_date,
+            time: taskPostForm.task_time,
+            flexible: taskPostForm.task_flexible,
+            poster_id: ''
+        }).catch((e) => {
+            console.log(e)
+        })
+
+        alert('user created successfully')
+        setTaskPostForm('')
+
+    }
+
+
+
     return (
         <div className="post-task">
             <sidebar className="post-task__sidebar">
@@ -87,20 +129,20 @@ const PostTask = () => {
                     <img src={logo} alt="" className="post-task__logo" />
                     <h3 className="post-task__heading">Title and Date</h3>
                 </div>
-                <form className="post-task__form" >
+                <form className="post-task__form" onSubmit={handleFormSubmit}>
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">In a few words, what do you need done?</label>
-                        <input type="text" className="post-task__form__input" />
+                        <label htmlFor="task_title" className="post-task__form__label">In a few words, what do you need done?</label>
+                        <input onChange={handleInputChange} type="text" className="post-task__form__input" name='task_title' />
                     </div>
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">When do you need this done?</label>
+                        <label htmlFor="task_date" className="post-task__form__label">When do you need this done?</label>
                         <div className="post-task__form__input-container">
-                            <input type="date" className="post-task__form__input post-task__form__input--half" />
-                            <input type="time" className="post-task__form__input post-task__form__input--half" />
+                            <input onChange={handleInputChange} type="date" className="post-task__form__input post-task__form__input--half" name='task_date' />
+                            <input onChange={handleInputChange} type="time" className="post-task__form__input post-task__form__input--half" name='task_time' />
                         </div>
                         <OrDivider />
                         <div className="post-task__form__checkbox">
-                            <input type="checkbox" name="remember_me" id="remember_me" className='post-task__form__checkbox__input' />
+                            <input onChange={handleInputChange} type="checkbox" name="task_flexible" id="remember_me" className='post-task__form__checkbox__input' />
                             <label htmlFor="remember_me" className='post-task__form__checkbox__label'>I am flexible</label>
                         </div>
 
@@ -130,20 +172,20 @@ const PostTask = () => {
                 </div>
                 <form className="post-task__form" >
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">Type</label>
-                        <select name="" id="" className='post-task__form__input'>
-                            <option value="">In-Person</option>
-                            <option value="">Online</option>
+                        <label htmlFor="task_type" className="post-task__form__label">Type</label>
+                        <select onChange={handleInputChange} name="task_type" id="" className='post-task__form__input'>
+                            <option value="In-Person">In-Person</option>
+                            <option value="Remote">Remote</option>
                         </select>
                     </div>
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">Where do you need this done?</label>
+                        <label htmlFor="task_city" className="post-task__form__label">Where do you need this done?</label>
 
-                        <input type="text" className="post-task__form__input" placeholder='City' />
+                        <input onChange={handleInputChange} type="text" className="post-task__form__input" placeholder='City' name='task_city' />
 
                         <OrDivider />
 
-                        <input type="text" className="post-task__form__input" placeholder='Postal Code' />
+                        <input onChange={handleInputChange} type="text" className="post-task__form__input" placeholder='Postal Code' name='task_postal' />
 
 
                     </div>
@@ -176,8 +218,8 @@ const PostTask = () => {
                 </div>
                 <form className="post-task__form" >
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">What are the details</label>
-                        <textarea type="text" className="post-task__form__input post-task__form__input--textarea" />
+                        <label htmlFor="task_details" className="post-task__form__label">What are the details</label>
+                        <textarea onChange={handleInputChange} type="text" className="post-task__form__input post-task__form__input--textarea" name='task_details' />
                     </div>
 
                     <div className="post-task__button-container">
@@ -208,8 +250,8 @@ const PostTask = () => {
                 </div>
                 <form className="post-task__form" >
                     <div className="post-task__form__group">
-                        <label htmlFor="" className="post-task__form__label">What is your budget?</label>
-                        <input type="text" className="post-task__form__input" />
+                        <label htmlFor="task_budget" className="post-task__form__label">What is your budget?</label>
+                        <input onChange={handleInputChange} type="text" className="post-task__form__input" name='task_budget' />
                     </div>
 
                     <div className="post-task__button-container">

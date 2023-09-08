@@ -155,6 +155,11 @@
             display: flex;
             justify-content: space-between;
             gap: 10px;
+            flex-direction: column;
+
+            @include tablet {
+                flex-direction: row;
+            }
         }
 
         &__input {
@@ -176,7 +181,11 @@
             }
 
             &--half {
-                width: 50%;
+                width: 100%;
+
+                @include tablet {
+                    width: 50%;
+                }
             }
 
             &--textarea {
