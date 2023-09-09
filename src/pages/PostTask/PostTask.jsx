@@ -4,6 +4,7 @@ import arrowIcon from '../../assets/icons/arrow.svg';
 import { OrDivider } from '../../components/AuthenticationComponents/AuthenticationComponents';
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import { sideBarClick } from '../../utilities/utilities';
 
 const nextClick = (refArray, nextPage, sideRefArray, nextSideBar) => {
     sideRefArray.map(ref => {
@@ -29,17 +30,7 @@ const backClick = (refArray, previousPage, sideRefArray, previousSideBar) => {
     previousPage.current.classList.remove('post-task__container--hidden')
 }
 
-const sideBarClick = (refArray, currentPage, sideRefArray, currentSidebar) => {
-    sideRefArray.map(ref => {
-        ref.current.classList.remove('post-task__sidebar__item--active')
-    })
-    currentSidebar.current.classList.add('post-task__sidebar__item--active')
 
-    refArray.map(ref => {
-        ref.current.classList.add('post-task__container--hidden')
-    })
-    currentPage.current.classList.remove('post-task__container--hidden')
-}
 
 
 
@@ -103,7 +94,7 @@ const PostTask = () => {
 
     return (
         <div className="post-task margin-header">
-            <sidebar className="post-task__sidebar">
+            <div className="post-task__sidebar">
                 <ul className="post-task__sidebar__list">
                     <li onClick={(e) => {
                         e.preventDefault();
@@ -122,7 +113,7 @@ const PostTask = () => {
                         sideBarClick(refArray, budgetRef, sideRefArray, sideBudgetRef)
                     }} ref={sideBudgetRef} className="post-task__sidebar__item"><a href="" className="post-task__sidebar__link">Budget</a> </li>
                 </ul>
-            </sidebar>
+            </div>
 
             <div className="post-task__container" ref={titleDateRef}>
                 <div className="post-task__header">
