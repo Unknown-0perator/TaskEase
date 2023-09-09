@@ -59,3 +59,15 @@ export const displayDate = (dateInput, type) => {
       return `${month}/${day}/${year}`
   }
 }
+
+export const sideBarClick = (refArray, currentPage, sideRefArray, currentSidebar) => {
+    sideRefArray.map(ref => {
+        ref.current.classList.remove('post-task__sidebar__item--active')
+    })
+    currentSidebar.current.classList.add('post-task__sidebar__item--active')
+
+    refArray.map(ref => {
+        ref.current.classList.add('post-task__container--hidden')
+    })
+    currentPage.current.classList.remove('post-task__container--hidden')
+}

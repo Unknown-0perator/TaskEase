@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import TaskList from './pages/TaskList/TaskList';
 import PostTask from './pages/PostTask/PostTask';
 import TaskDetail from './pages/TaskDetail/TaskDetail';
+import Profile from './pages/Profile/Profile';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './components/Footer/Footer';
@@ -44,6 +45,7 @@ function App() {
         <Route path='tasks' element={<TaskList />} />
         <Route path='tasks/:taskId' element={<TaskDetail API_URL={API_URL} />} />
         <Route path='post-task' element={<PostTask profileData={profileData} />} />
+        <Route path='profile' element={<Profile profileData={profileData} />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
       <Footer />

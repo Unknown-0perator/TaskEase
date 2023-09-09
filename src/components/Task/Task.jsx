@@ -7,7 +7,7 @@ const Task = ({ task }) => {
         <div className="task">
             <div className="task__header">
                 <p className="task__title">{task.title}</p>
-                <Tag type={task.status} />
+                <Tag status={task.status} />
             </div>
             <div className="task__body">
                 <div className="task__detail-group">

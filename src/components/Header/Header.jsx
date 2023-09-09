@@ -53,7 +53,7 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                             <Link to='post-task' className="navbar__link">Post a task</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='sign-up' className="navbar__link">Profile</Link>
+                            <Link to='profile' className="navbar__link">Profile</Link>
                         </li>
                         <li className="navbar__item">
                             <ButtonPrimary text='Logout' onClick={logout} color='yellow' />

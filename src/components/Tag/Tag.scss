@@ -23,3 +23,26 @@
     }
 
 }
+
+.tag-application {
+    font-family: "Urbanist";
+    font-weight: 600;
+    font-size: 18px;
+
+    @include tablet {
+        font-size: 20px;
+    }
+
+
+    &--pending {
+        color: #64748B;
+    }
+
+    &--accepted {
+        color: #22c55e;
+    }
+
+    &--rejected {
+        color: #ef4444;
+    }
+}

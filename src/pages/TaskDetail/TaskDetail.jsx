@@ -63,7 +63,7 @@ const TaskDetail = ({ API_URL }) => {
                                     </div>
                                     <div className="task-detail__info">
                                         <p className="task-detail__title">Status</p>
-                                        <Tag type={taskDetail.status} />
+                                        <Tag status={taskDetail.status} />
                                     </div>
                                 </div>
                                 <div className="task-detail__group">
