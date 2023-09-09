@@ -30,10 +30,11 @@ function App() {
     axios.get(`${API_URL}/auth/profile`, authorization)
       .then(({ data }) => {
         setIsLoggedIn(true);
-        setProfileData(data)
+        setProfileData(data[0])
       })
       .catch(err => console.log(err))
   }, [])
+
   return (
 
     <BrowserRouter>

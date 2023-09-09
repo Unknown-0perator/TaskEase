@@ -34,7 +34,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
             setTimeout(() => {
                 setIsLoggedIn(true);
                 navigate('/');
-            }, 1000)
+            }, 1500)
 
         }).catch(err => console.log("login error", err.response.data))
 
