@@ -2,7 +2,7 @@ import './Task.scss';
 import Tag from '../Tag/Tag';
 import { displayDate } from '../../utilities/utilities';
 
-const Task = ({ task }) => {
+const Task = ({ task, API_URL }) => {
     return (
         <div className="task">
             <div className="task__header">
@@ -24,7 +24,11 @@ const Task = ({ task }) => {
                 </div>
             </div>
             <div className="task__footer">
-                <div className="task__user-profile-container"></div>
+                <div className="task__user-profile-container">
+                    {(task.user_image !== "") ? (
+                        <img src={`${API_URL}/${task.user_image}`} alt="" className='task__user-profile' />
+                    ) : <></>}
+                </div>
                 <div className="task__budget">{`CAD ${task.budget}`}</div>
             </div>
         </div>

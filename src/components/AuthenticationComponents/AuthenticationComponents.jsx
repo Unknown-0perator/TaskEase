@@ -9,6 +9,8 @@ export const AuthenticationHeader = ({ type }) => {
         text = 'We love to see you joining our community';
     } else if (type === 'login') {
         text = 'Welcome! Nice to see you again'
+    } else if (type === 'logged-in') {
+        text = `You are already logged in.`
     }
     return (
         <div className="authentication__header">
@@ -24,12 +26,14 @@ export const FormInput = ({ placeholder, name, type, onChange }) => {
     )
 }
 
-export const Checkbox = ({ type, required }) => {
+export const Checkbox = ({ type, required, setCheckbox }) => {
     if (type === 'sign-up') {
 
         return (
             <div className="form__checkbox">
-                <input type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' required={required} />
+                <input onChange={(e) => {
+                    setCheckbox(!e.target.checked)
+                }} type="checkbox" name="terms-conditions" id="terms-conditions" className='form__checkbox__input' required={required} />
                 <label htmlFor="terms-conditions" className='form__checkbox__label'>I have read and agree to all <Link className='terms-conditions'>Terms & conditions</Link></label>
             </div>
         )
@@ -63,6 +67,9 @@ export const AuthenticationFooter = ({ type }) => {
     } else if (type === 'login') {
         to = 'sign-up';
         text = 'Join us today'
+    } else if (type === 'logged-in') {
+        to = 'profile';
+        text = 'View your profile'
     }
     return (
         <div className="authentication__footer">

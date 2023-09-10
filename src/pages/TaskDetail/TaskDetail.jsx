@@ -8,11 +8,16 @@ import { Link } from 'react-router-dom';
 
 
 
-const TaskDetail = ({ API_URL, profileData }) => {
+
+const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
+    const [offer, setOffer] = useState(0)
+    const [offerError, setOfferError] = useState(true)
+    const [canSendOffer, setCanSendOffer] = useState(true)
+    const [offerDetail, setOfferDetail] = useState({})
+    const [offerErrorMessage, setOfferErrorMessage] = useState('')
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [comments, setComments] = useState([])
-
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
@@ -20,8 +25,34 @@ const TaskDetail = ({ API_URL, profileData }) => {
         axios.get(`${API_URL}/tasks/${taskId}/comments`).then((response) => {
             setComments(response.data)
         })
-    }, [])
-    console.log(profileData)
+        axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
+            response.data.map(offer => {
+                if (offer.user_id === profileData.user_id) {
+                    setOfferDetail(offer)
+                    setCanSendOffer(false)
+                }
+                else {
+                    setCanSendOffer(true)
+                }
+            })
+        })
+    }, [API_URL, profileData.user_id, taskId])
+
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        if (offerError) {
+            return;
+        }
+        axios.post(`${API_URL}/tasks/${taskId}/offer`, {
+            user_id: profileData.user_id,
+            offer_amount: offer
+        }).catch(err => {
+
+        })
+        event.target.reset()
+    }
+
 
 
     return (
@@ -83,20 +114,54 @@ const TaskDetail = ({ API_URL, profileData }) => {
                                     <p className="offer__title">Budget</p>
                                     <p className="offer__budget">CAD {taskDetail.budget}</p>
                                 </div>
-                                {profileData ? (
-                                    <button className="offer__button">Send an offer</button>
-                                ) : (<Link to='/login' className="offer__button">Login</Link>)}
+                                {isLoggedIn ? (
+                                    <> {canSendOffer ? (
+                                        <form className="form-offer" onSubmit={handleFormSubmit}>
+                                            <input onChange={(e) => {
+                                                setOffer(e.target.value)
+                                                if (e.target.value <= 0) {
+                                                    setOfferErrorMessage('Please Enter a valid amount')
+                                                    setOfferError(true)
+                                                } else if (e.target.value > taskDetail.budget) {
+                                                    setOfferErrorMessage('Your offer is more than budget')
+                                                    setOfferError(true)
+                                                } else {
+                                                    setOfferErrorMessage('')
+                                                    setOfferError(false)
+                                                }
+                                            }} type="number" className="form-offer__input" placeholder='Type your offer amount' />
+
+                                            <p className="error_message">{offerErrorMessage}</p>
+                                            <button type='submit' className="offer__button">Send an offer</button>
+                                        </form>
+                                    ) : (
+                                        <><div className="offer__text">
+                                            <p className="offer__title">Offer Amount</p>
+                                            <p className="offer__amount">{`CAD ${offerDetail.offer_amount}`}</p>
+                                        </div>
+                                            <p className="success_message">{`You have already sent an offer`}</p>
+                                            <button className="offer__button">withdraw Offer</button>
+                                        </>
+                                    )}
+                                    </>
+                                ) : (<Link to='/login' className="offer__button">Login to send Offer</Link>)}
+
                             </div>
                         </div>
                         <section className="comment">
+                            {(comments.length !== 0) ? (
+                                <p className="comment__count comment__count--bold">Comments</p>)
+                                : (
+                                    <p className="comment__count comment__count--bold">No Comment</p>)
+                            }
+                            {isLoggedIn ? (
+                                <div className="comment__input">
+                                    <div className="comment__img-container u-margin-top">
+                                        {(profileData && profileData.user_image !== "") ? (
+                                            <img src={`${API_URL}${profileData.user_image}`} alt="user profile" className="comment__img" />
+                                        ) : (<></>)}
+                                    </div>
 
-
-                            <p className="comment__count comment__count--bold">Comments</p>
-                            <div className="comment__input">
-                                <div className="comment__img-container u-margin-top">
-                                    <img src="" alt="user profile" className="comment__img" />
-                                </div>
-                                {profileData ? (
                                     <form className="comment__form">
                                         <div className="comment__form__group">
                                             <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
@@ -111,14 +176,19 @@ const TaskDetail = ({ API_URL, profileData }) => {
                                         </div>
                                         <button className="comment__button">Comment</button>
                                     </form>
-                                ) : (<></>)}
-                            </div>
+
+                                </div>
+                            ) : (<></>)}
                             {/* Sort comments based on timestamp */}
 
                             {comments.map(comment => {
                                 return (
                                     <div className="comment__output">
-                                        <div className="comment__img-container"></div>
+                                        <div className="comment__img-container">
+                                            {(comment.user_image !== "") ? (
+                                                <img src={`${API_URL}/${comment.user_image}`} alt="" className='comment__img' />
+                                            ) : <></>}
+                                        </div>
                                         <div className="comment__wrapper">
                                             <div className="comment__header">
                                                 <p className="comment__user">{`${comment.first_name} ${comment.last_name}`}</p>
@@ -139,7 +209,7 @@ const TaskDetail = ({ API_URL, profileData }) => {
                     <></>
                 )}
             </div>
-        </div>
+        </div >
     )
 }
 

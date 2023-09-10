@@ -25,7 +25,7 @@ const TaskList = () => {
                 {taskList.map((task) => {
                     return (
                         <Link to={`/tasks/${task.task_id}`} className="tasklist__item" key={task.task_id}>
-                            <Task task={task} />
+                            <Task task={task} API_URL={API_URL} />
                         </Link>
                     )
                 })}

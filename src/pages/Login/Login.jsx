@@ -5,22 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData, API_URL }) => {
 
     let navigate = useNavigate();
-
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: ''
     })
-
     const handleInputChange = (event) => {
         setLoginForm({
             ...loginForm, [event.target.name]: event.target.value
         })
     }
-
-    const API_URL = process.env.REACT_APP_BACKEND_URL;
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -28,18 +24,20 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
             email: loginForm.email,
             password: loginForm.password
         }).then((response) => {
-            const authToken = response.data.token;
-            sessionStorage.authToken = authToken;
-            setProfileData(response.data.user[0])
-            setTimeout(() => {
-                setIsLoggedIn(true);
-                navigate('/');
-            }, 2500)
+            if (response.status !== 403) {
+                event.target.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>'
+                const authToken = response.data.token;
+                sessionStorage.authToken = authToken;
+                setProfileData(response.data.user)
+                setTimeout(() => {
+                    setIsLoggedIn(true);
+                    navigate('/profile');
+                }, 2500)
+            }
+        }).catch(err => alert(`Error: ${err.message}`))
 
-        }).catch(err => console.log("login error", err.response.data))
-
+        event.target.reset();
         setLoginForm('')
-        navigate('/')
 
     }
 
@@ -67,9 +65,14 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setProfileData }) => {
                     </div>
                 </div>
             ) : (
-                <>
-                    {navigate('/')}
-                </>
+                <div className="authentication margin-header">
+                    <div className="authentication__container">
+                        <AuthenticationHeader type='logged-in' />
+
+
+                        <AuthenticationFooter type='logged-in' />
+                    </div>
+                </div>
             )}
         </div>
 

@@ -66,6 +66,17 @@
         width: 36px;
         height: 36px;
         background-color: #e1e1e1;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    &__user-profile {
+        height: 100%;
+        transform: scale(1.5);
+
     }
 
     &__budget {

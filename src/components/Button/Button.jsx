@@ -12,9 +12,9 @@ export const ButtonPrimary = ({ text, color, to, onClick }) => {
 }
 
 // Button for Login and Sign up
-export const ButtonAuthentication = ({ text, type }) => {
+export const ButtonAuthentication = ({ text, type, disabled }) => {
     return (
-        <button type={type} className="button button__submit">{text} <img src={arrowIcon} alt="" className="button__icon" /></button>
+        <button disabled={disabled} type={type} className="button button__submit">{text} <img src={arrowIcon} alt="" className="button__icon" /></button>
     )
 }
 

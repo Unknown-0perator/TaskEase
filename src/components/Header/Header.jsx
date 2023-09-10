@@ -2,10 +2,12 @@ import logo from '../../assets/logos/2.svg';
 
 import './Header.scss'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ButtonPrimary } from '../Button/Button';
 
+
 const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false)
     const logout = () => {
         sessionStorage.removeItem('authToken');
@@ -53,7 +55,7 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                             <Link to='profile' className="navbar__link">Profile</Link>
                         </li>
                         <li className="navbar__item">
-                            <ButtonPrimary text='Logout' onClick={logout} color='yellow' />
+                            <ButtonPrimary to='/' text='Logout' onClick={logout} color='yellow' />
                         </li>
                     </ul>
                 )}

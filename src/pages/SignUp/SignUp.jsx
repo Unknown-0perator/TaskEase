@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
-
+    const [checkbox, setCheckbox] = useState(true)
     let navigate = useNavigate();
 
     const [signUpForm, setSignUpForm] = useState({
@@ -20,7 +20,6 @@ const SignUp = () => {
         setSignUpForm({
             ...signUpForm, [event.target.name]: event.target.value
         })
-        console.log(`${event.target.name}:${event.target.value}`)
     }
 
     const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -49,8 +48,8 @@ const SignUp = () => {
                     <FormInput onChange={handleInputChange} name='last_name' placeholder='Last name' type='text' />
                     <FormInput onChange={handleInputChange} name='email' placeholder='Your email address' type='email' />
                     <FormInput onChange={handleInputChange} name='password' placeholder='Enter password' type='password' />
-                    <Checkbox type='sign-up' />
-                    <ButtonAuthentication text='Join Now' type="submit" />
+                    <Checkbox type='sign-up' setCheckbox={setCheckbox} />
+                    <ButtonAuthentication text='Join Now' type="submit" disabled={checkbox} />
                 </form>
 
                 <OrDivider />

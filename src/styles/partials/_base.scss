@@ -23,3 +23,18 @@ a:visited {
 .hidden {
     display: none !important;
 }
+
+.error_message {
+    font-family: 'Open Sans';
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: .5rem;
+    color: #EF4444;
+}
+
+.success_message {
+    font-family: 'Open Sans';
+    font-size: 13px;
+    text-align: center;
+    color: #22C55E;
+}
