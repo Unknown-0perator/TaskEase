@@ -4,6 +4,7 @@ import Task from '../../components/Task/Task';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ButtonPrimary } from '../../components/Button/Button';
 
 const TaskList = () => {
 
@@ -30,7 +31,7 @@ const TaskList = () => {
                 })}
             </ul>
 
-            <MapContainer className='map' center={taskList.length > 0 ? [taskList[0].latitude, taskList[0].longitude] : [51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer className='map' center={taskList.length > 0 ? [taskList[0].latitude, taskList[0].longitude] : [37.123456, -121.654321]} zoom={5} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -39,7 +40,7 @@ const TaskList = () => {
                     <Marker position={[task.latitude, task.longitude]} key={task.task_id}>
                         <Popup className='popup'>
                             <p className="popup__heading">{task.title}</p>
-                            <button className="popup__button">View Task</button>
+                            <ButtonPrimary text='View Task' to={`/tasks/${task.task_id}`} />
                         </Popup>
                     </Marker>
                 ))}

@@ -47,9 +47,6 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                             <Link to='tasks' className="navbar__link">Browse tasks</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link className="navbar__link">My tasks</Link>
-                        </li>
-                        <li className="navbar__item">
                             <Link to='post-task' className="navbar__link">Post a task</Link>
                         </li>
                         <li className="navbar__item">

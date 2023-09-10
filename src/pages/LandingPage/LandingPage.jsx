@@ -62,7 +62,7 @@ const LandingPage = () => {
                 <div className="advantage__text-container">
                     <h2 className="advantage__text-heading">Get Started Today</h2>
                     <p className="advantage__text-content">Join TaskEase today and experience the convenience of finding help or offering your assistance for short-term tasks. Sign up now and simplify your life with TaskEase!</p>
-                    <ButtonPrimary text='Join now' color='yellow' />
+                    <ButtonPrimary to='sign-up' text='Join now' color='yellow' />
                 </div>
             </section>
 
