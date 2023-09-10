@@ -4,10 +4,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
+import { Link } from 'react-router-dom';
 
 
 
-const TaskDetail = ({ API_URL }) => {
+const TaskDetail = ({ API_URL, profileData }) => {
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [comments, setComments] = useState([])
@@ -20,6 +21,8 @@ const TaskDetail = ({ API_URL }) => {
             setComments(response.data)
         })
     }, [])
+    console.log(profileData)
+
 
     return (
         <div className="task-detail-container margin-header">
@@ -80,7 +83,9 @@ const TaskDetail = ({ API_URL }) => {
                                     <p className="offer__title">Budget</p>
                                     <p className="offer__budget">CAD {taskDetail.budget}</p>
                                 </div>
-                                <button className="offer__button">Send an offer</button>
+                                {profileData ? (
+                                    <button className="offer__button">Send an offer</button>
+                                ) : (<Link to='/login' className="offer__button">Login</Link>)}
                             </div>
                         </div>
                         <section className="comment">
@@ -91,20 +96,22 @@ const TaskDetail = ({ API_URL }) => {
                                 <div className="comment__img-container u-margin-top">
                                     <img src="" alt="user profile" className="comment__img" />
                                 </div>
-                                <form className="comment__form">
-                                    <div className="comment__form__group">
-                                        <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
-                                        <textarea
-                                            className="comment__form__input comment__form__input--textarea"
+                                {profileData ? (
+                                    <form className="comment__form">
+                                        <div className="comment__form__group">
+                                            <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
+                                            <textarea
+                                                className="comment__form__input comment__form__input--textarea"
 
-                                            name="comment" id="comment"
-                                            placeholder="Add a new comment"
+                                                name="comment" id="comment"
+                                                placeholder="Add a new comment"
 
-                                            required>
-                                        </textarea>
-                                    </div>
-                                    <button className="comment__button">Comment</button>
-                                </form>
+                                                required>
+                                            </textarea>
+                                        </div>
+                                        <button className="comment__button">Comment</button>
+                                    </form>
+                                ) : (<></>)}
                             </div>
                             {/* Sort comments based on timestamp */}
 

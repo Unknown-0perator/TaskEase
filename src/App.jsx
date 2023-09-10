@@ -30,10 +30,14 @@ function App() {
     axios.get(`${API_URL}/auth/profile`, authorization)
       .then(({ data }) => {
         setIsLoggedIn(true);
-        setProfileData(data)
+        setProfileData(data[0])
       })
       .catch(err => console.log(err))
   }, [])
+
+  console.log(profileData)
+
+
   return (
 
     <BrowserRouter>
@@ -43,7 +47,7 @@ function App() {
         <Route path='sign-up' element={<SignUp />} />
         <Route path='login' element={<Login isLoggedIn={isLoggedIn} setProfileData={setProfileData} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='tasks' element={<TaskList />} />
-        <Route path='tasks/:taskId' element={<TaskDetail API_URL={API_URL} />} />
+        <Route path='tasks/:taskId' element={<TaskDetail API_URL={API_URL} profileData={profileData} />} />
         <Route path='post-task' element={<PostTask profileData={profileData} />} />
         <Route path='profile' element={<Profile profileData={profileData} />} />
         <Route path='*' element={<Navigate to='/' />} />

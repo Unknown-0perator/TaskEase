@@ -39,6 +39,10 @@
     &__body {
         font-size: 14px;
         font-family: 'Open Sans';
+
+        @include tablet {
+            width: 100%;
+        }
     }
 
     &__group {
@@ -88,6 +92,7 @@
     gap: 1rem;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
     @include tablet {
         width: 35%;
