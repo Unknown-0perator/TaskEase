@@ -1,7 +1,7 @@
 import './TaskDetail.scss'
 import Tag from '../../components/Tag/Tag';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [comments, setComments] = useState([])
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
@@ -47,6 +48,18 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
         axios.post(`${API_URL}/tasks/${taskId}/offer`, {
             user_id: profileData.user_id,
             offer_amount: offer
+        }).then(() => {
+            axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
+                response.data.map(offer => {
+                    if (offer.user_id === profileData.user_id) {
+                        setOfferDetail(offer)
+                        setCanSendOffer(false)
+                    }
+                    else {
+                        setCanSendOffer(true)
+                    }
+                })
+            })
         }).catch(err => {
 
         })
@@ -54,6 +67,10 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     }
 
 
+    const withdrawOffer = (offerId) => {
+        axios.delete(`${API_URL}/tasks/${taskId}/offer/${offerId}`)
+        setCanSendOffer(true)
+    }
 
     return (
         <div className="task-detail-container margin-header">
@@ -140,7 +157,9 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                             <p className="offer__amount">{`CAD ${offerDetail.offer_amount}`}</p>
                                         </div>
                                             <p className="success_message">{`You have already sent an offer`}</p>
-                                            <button className="offer__button">withdraw Offer</button>
+                                            <button onClick={() => {
+                                                withdrawOffer(offerDetail.offer_id)
+                                            }} className="offer__button">withdraw Offer</button>
                                         </>
                                     )}
                                     </>
