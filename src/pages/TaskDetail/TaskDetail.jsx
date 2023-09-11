@@ -1,7 +1,7 @@
 import './TaskDetail.scss'
 import Tag from '../../components/Tag/Tag';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,6 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [comments, setComments] = useState([])
-    const navigate = useNavigate();
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])

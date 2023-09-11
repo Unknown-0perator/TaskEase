@@ -67,6 +67,7 @@ function App() {
         <Route path='profile' element={<Profile
           isLoggedIn={isLoggedIn}
           profileData={profileData}
+          API_URL={API_URL}
         />} />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
