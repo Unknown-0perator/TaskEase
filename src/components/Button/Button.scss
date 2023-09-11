@@ -21,6 +21,10 @@
         gap: 10px;
         background-color: #295FCC;
         color: #ffffff;
+
+        &:disabled {
+            background-color: #A9A9A9;
+        }
     }
 
     &__icon {

@@ -2,7 +2,7 @@ import './PostTask.scss';
 import logo from '../../assets/logos/1.svg';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import { OrDivider } from '../../components/AuthenticationComponents/AuthenticationComponents';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { sideBarClick } from '../../utilities/utilities';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +35,13 @@ const backClick = (refArray, previousPage, sideRefArray, previousSideBar) => {
 
 
 
-const PostTask = ({ profileData }) => {
+const PostTask = ({ profileData, isLoggedIn }) => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login')
+        }
+    }, [])
 
 
 
