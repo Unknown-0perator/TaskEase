@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
+import CommentInput from '../../components/CommentInput/CommentInput';
 
 
 
@@ -17,7 +18,8 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const [offerErrorMessage, setOfferErrorMessage] = useState('')
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
-    const [comments, setComments] = useState([])
+    const [comments, setComments] = useState([]);
+    const [commentInput, setCommentInput] = useState("");
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
@@ -172,36 +174,12 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                 : (
                                     <p className="comment__count comment__count--bold">No Comment</p>)
                             }
-                            {isLoggedIn ? (
-                                <div className="comment__input">
-                                    <div className="comment__img-container u-margin-top">
-                                        {(profileData && profileData.user_image !== "") ? (
-                                            <img src={`${API_URL}${profileData.user_image}`} alt="user profile" className="comment__img" />
-                                        ) : (<></>)}
-                                    </div>
-
-                                    <form className="comment__form">
-                                        <div className="comment__form__group">
-                                            <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
-                                            <textarea
-                                                className="comment__form__input comment__form__input--textarea"
-
-                                                name="comment" id="comment"
-                                                placeholder="Add a new comment"
-
-                                                required>
-                                            </textarea>
-                                        </div>
-                                        <button className="comment__button">Comment</button>
-                                    </form>
-
-                                </div>
-                            ) : (<></>)}
+                            <CommentInput isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} />
                             {/* Sort comments based on timestamp */}
 
                             {comments.map(comment => {
                                 return (
-                                    <div className="comment__output">
+                                    <div className="comment__output" key={comment.comment_id}>
                                         <div className="comment__img-container">
                                             {(comment.user_image !== "") ? (
                                                 <img src={`${API_URL}/${comment.user_image}`} alt="" className='comment__img' />
