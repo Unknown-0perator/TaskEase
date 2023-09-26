@@ -18,14 +18,12 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const [offerErrorMessage, setOfferErrorMessage] = useState('')
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
-    const [comments, setComments] = useState([]);
+
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
         })
-        axios.get(`${API_URL}/comment/task/${taskId}`).then((response) => {
-            setComments(response.data)
-        })
+
         axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
             response.data.map(offer => {
                 if (offer.user_id === profileData.user_id) {
@@ -168,7 +166,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                             </div>
                         </div>
 
-                        <CommentList isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} comments={comments} />
+                        <CommentList isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} />
 
                     </>
                 ) : (

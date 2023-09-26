@@ -1,8 +1,10 @@
-import { useState } from 'react';
 import './CommentInput.scss';
-import axios from 'axios';
 
-const CommentInput = ({ isLoggedIn, profileData, API_URL, taskId }) => {
+
+const CommentInput = ({ isLoggedIn, profileData, API_URL, setCommentInput, handleCommentPost }) => {
+    const handleCommentChange = (event) => {
+        setCommentInput(event.target.value)
+    }
     return (
         <>
             {
@@ -15,12 +17,12 @@ const CommentInput = ({ isLoggedIn, profileData, API_URL, taskId }) => {
                             ) : (<></>)}
                         </div>
 
-                        <form className="comment__form">
+                        <form onSubmit={handleCommentPost} className="comment__form">
                             <div className="comment__form__group">
                                 <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
                                 <textarea
                                     className="comment__form__input comment__form__input--textarea"
-
+                                    onChange={handleCommentChange}
                                     name="comment" id="comment"
                                     placeholder="Add a new comment"
 
