@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import './CommentInput.scss';
+import axios from 'axios';
 
-const CommentInput = ({ isLoggedIn, profileData, API_URL }) => {
+const CommentInput = ({ isLoggedIn, profileData, API_URL, taskId }) => {
     return (
         <>
             {

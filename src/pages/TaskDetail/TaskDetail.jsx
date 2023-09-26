@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
-import CommentInput from '../../components/CommentInput/CommentInput';
+import CommentList from '../../components/CommentList/CommentList';
 
 
 
@@ -19,12 +19,11 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [comments, setComments] = useState([]);
-    const [commentInput, setCommentInput] = useState("");
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
         })
-        axios.get(`${API_URL}/tasks/${taskId}/comments`).then((response) => {
+        axios.get(`${API_URL}/comment/task/${taskId}`).then((response) => {
             setComments(response.data)
         })
         axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
@@ -168,38 +167,9 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
 
                             </div>
                         </div>
-                        <section className="comment">
-                            {(comments.length !== 0) ? (
-                                <p className="comment__count comment__count--bold">Comments</p>)
-                                : (
-                                    <p className="comment__count comment__count--bold">No Comment</p>)
-                            }
-                            <CommentInput isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} />
-                            {/* Sort comments based on timestamp */}
 
-                            {comments.map(comment => {
-                                return (
-                                    <div className="comment__output" key={comment.comment_id}>
-                                        <div className="comment__img-container">
-                                            {(comment.user_image !== "") ? (
-                                                <img src={`${API_URL}/${comment.user_image}`} alt="" className='comment__img' />
-                                            ) : <></>}
-                                        </div>
-                                        <div className="comment__wrapper">
-                                            <div className="comment__header">
-                                                <p className="comment__user">{`${comment.first_name} ${comment.last_name}`}</p>
-                                                <p className="comment__date">{displayDate(comment.timestamp)}</p>
-                                            </div>
-                                            <p className="comment__text">{comment.comment_text}</p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                        <CommentList isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} comments={comments} />
 
-
-
-
-                        </section>
                     </>
                 ) : (
                     <></>
