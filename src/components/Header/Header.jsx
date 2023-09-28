@@ -1,17 +1,25 @@
+// Import the 'logo' image and styles
 import logo from '../../assets/logos/2.svg';
 import './Header.scss'
+
+// Import necessary React components and hooks
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonPrimary } from '../Button/Button';
 
-
+// Define the Header component
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
+
+    // State to manage mobile screen navbar menu
     const [menuOpen, setMenuOpen] = useState(false)
+
+    // Function for handling user logout
     const logout = () => {
-        sessionStorage.removeItem('authToken');
-        setIsLoggedIn(false)
+        sessionStorage.removeItem('authToken'); // Remove the authToken from sessionStorage
+        setIsLoggedIn(false) // Update the parent component with the logged-out state
     }
 
+    // Function for closing the menu after clicking on a link in the navbar
     const menuClose = () => {
         setMenuOpen(false);
     }
