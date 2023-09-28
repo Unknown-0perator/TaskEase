@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
+import CommentList from '../../components/CommentList/CommentList';
 
 
 
@@ -17,14 +18,12 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const [offerErrorMessage, setOfferErrorMessage] = useState('')
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
-    const [comments, setComments] = useState([])
+
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
         })
-        axios.get(`${API_URL}/tasks/${taskId}/comments`).then((response) => {
-            setComments(response.data)
-        })
+
         axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
             response.data.map(offer => {
                 if (offer.user_id === profileData.user_id) {
@@ -166,62 +165,9 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
 
                             </div>
                         </div>
-                        <section className="comment">
-                            {(comments.length !== 0) ? (
-                                <p className="comment__count comment__count--bold">Comments</p>)
-                                : (
-                                    <p className="comment__count comment__count--bold">No Comment</p>)
-                            }
-                            {isLoggedIn ? (
-                                <div className="comment__input">
-                                    <div className="comment__img-container u-margin-top">
-                                        {(profileData && profileData.user_image !== "") ? (
-                                            <img src={`${API_URL}${profileData.user_image}`} alt="user profile" className="comment__img" />
-                                        ) : (<></>)}
-                                    </div>
 
-                                    <form className="comment__form">
-                                        <div className="comment__form__group">
-                                            <label className="comment__form__label" htmlFor="comment">Join the conversation</label>
-                                            <textarea
-                                                className="comment__form__input comment__form__input--textarea"
+                        <CommentList isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} />
 
-                                                name="comment" id="comment"
-                                                placeholder="Add a new comment"
-
-                                                required>
-                                            </textarea>
-                                        </div>
-                                        <button className="comment__button">Comment</button>
-                                    </form>
-
-                                </div>
-                            ) : (<></>)}
-                            {/* Sort comments based on timestamp */}
-
-                            {comments.map(comment => {
-                                return (
-                                    <div className="comment__output">
-                                        <div className="comment__img-container">
-                                            {(comment.user_image !== "") ? (
-                                                <img src={`${API_URL}/${comment.user_image}`} alt="" className='comment__img' />
-                                            ) : <></>}
-                                        </div>
-                                        <div className="comment__wrapper">
-                                            <div className="comment__header">
-                                                <p className="comment__user">{`${comment.first_name} ${comment.last_name}`}</p>
-                                                <p className="comment__date">{displayDate(comment.timestamp)}</p>
-                                            </div>
-                                            <p className="comment__text">{comment.comment_text}</p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-
-
-
-
-                        </section>
                     </>
                 ) : (
                     <></>

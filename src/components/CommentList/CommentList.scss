@@ -1,0 +1,117 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.comment {
+    margin-top: 24px;
+
+    &__count {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .5rem;
+        color: $color-primary-gray;
+        font-size: 0.8125rem;
+        line-height: 1.125rem;
+
+        @include tablet {
+            font-size: 0.875rem;
+            line-height: 1.375rem;
+        }
+
+        &--bold {
+            color: $color-primary-dark;
+            font-weight: 700;
+        }
+    }
+
+    &__input {
+        padding: 1rem 0;
+        display: flex;
+        gap: 1rem;
+        border-bottom: 1px solid $color-secondary-gray;
+
+        @include tablet {
+            padding: 1.5rem 0;
+        }
+
+        @include desktop {
+            padding-right: 1.5rem;
+        }
+    }
+
+    &__img-container {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: $color-secondary-gray;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+
+    &__img {
+        height: 100%;
+        transform: scale(1.5);
+
+        @include tablet {
+            height: 2.5rem;
+        }
+    }
+
+    &__output {
+        padding: 1rem 0;
+        display: flex;
+        gap: 1rem;
+        font-size: 0.8125rem;
+        line-height: 1.125rem;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $color-secondary-gray;
+        }
+
+        @include tablet {
+            padding: 1.5rem 0;
+        }
+
+        @include desktop {
+            padding-right: 1.5rem;
+        }
+    }
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    &__user {
+        color: #999999;
+        font-size: 14px;
+        font-family: "Urbanist";
+        font-weight: 600;
+    }
+
+    &__date {
+        font-size: 12px;
+        font-family: 'Urbanist';
+        font-weight: 600;
+        color: #999;
+    }
+
+    &__text {
+        font-size: 14px;
+        font-family: "Open Sans";
+        line-height: 18px;
+    }
+}
