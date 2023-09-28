@@ -53,7 +53,12 @@ function App() {
           profileData={profileData}
           isLoggedIn={isLoggedIn}
         />} />
-        <Route path='sign-up' element={<SignUp />} />
+        <Route path='sign-up' element={<SignUp
+          API_URL={API_URL}
+          isLoggedIn={isLoggedIn}
+          setProfileData={setProfileData}
+          setIsLoggedIn={setIsLoggedIn}
+        />} />
         <Route path='login' element={<Login
           API_URL={API_URL}
           isLoggedIn={isLoggedIn}
