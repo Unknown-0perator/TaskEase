@@ -43,9 +43,10 @@ const CommentList = ({ isLoggedIn, profileData, API_URL, taskId }) => {
                     <p className="comment__count comment__count--bold">No Comment</p>)
             }
             <CommentInput handleCommentPost={handleCommentPost} setCommentInput={setCommentInput} isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} />
-            {/* Sort comments based on timestamp */}
 
-            {comments.map(comment => {
+            {comments.sort((a, b) => {
+                return b.timestamp - a.timestamp
+            }).map(comment => {
                 return (
                     <CommentOutput comment={comment} API_URL={API_URL} key={comment.comment_id} />
                 )

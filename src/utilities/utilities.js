@@ -21,8 +21,15 @@ export const displayDate = (dateInput, type) => {
     let currentYear = currentDate.getFullYear();
     let currentHour = currentDate.getHours();
     let currentMinute = currentDate.getMinutes();
+    let timeStamp = undefined;
 
-    let timeStamp = new Date(Number(dateInput));
+    if (type === 'dayFormat') {
+        timeStamp = new Date(dateInput)
+    } else {
+        timeStamp = new Date(Number(dateInput));
+    }
+
+
     let weekday = timeStamp.getDay();
     let day = timeStamp.getDate();
     let month = timeStamp.getMonth() + 1;
@@ -32,6 +39,7 @@ export const displayDate = (dateInput, type) => {
     let minute = timeStamp.getMinutes();
 
     if (type === 'dayFormat' && currentYear === year) {
+
 
 
 
