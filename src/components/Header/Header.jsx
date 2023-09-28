@@ -1,17 +1,19 @@
 import logo from '../../assets/logos/2.svg';
-
 import './Header.scss'
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ButtonPrimary } from '../Button/Button';
 
 
-const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
-    const navigate = useNavigate();
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const logout = () => {
         sessionStorage.removeItem('authToken');
         setIsLoggedIn(false)
+    }
+
+    const menuClose = () => {
+        setMenuOpen(false);
     }
 
     return (
@@ -27,35 +29,38 @@ const Header = ({ isLoggedIn, profileData, setIsLoggedIn }) => {
                     <ul className='navbar__list'>
 
                         <li className="navbar__item">
-                            <Link to='/' className="navbar__link">Home</Link>
+                            <Link to='/' onClick={menuClose} className="navbar__link">Home</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='/tasks' className="navbar__link">Browse Tasks</Link>
+                            <Link to='/tasks' onClick={menuClose} className="navbar__link">Browse Tasks</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='login' className="navbar__link">Log in</Link>
+                            <Link to='login' onClick={menuClose} className="navbar__link">Log in</Link>
                         </li>
                         <li className="navbar__item">
-                            <ButtonPrimary to='/sign-up' text='Sign Up' color='yellow' />
+                            <ButtonPrimary to='/sign-up' onClick={menuClose} text='Sign Up' color='yellow' />
                         </li>
 
                     </ul>
                 ) : (
                     <ul className="navbar__list">
                         <li className="navbar__item">
-                            <Link to='/' className="navbar__link">Home</Link>
+                            <Link to='/' onClick={menuClose} className="navbar__link">Home</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='tasks' className="navbar__link">Browse tasks</Link>
+                            <Link to='tasks' onClick={menuClose} className="navbar__link">Browse tasks</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='post-task' className="navbar__link">Post a task</Link>
+                            <Link to='post-task' onClick={menuClose} className="navbar__link">Post a task</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link to='profile' className="navbar__link">Profile</Link>
+                            <Link to='profile' onClick={menuClose} className="navbar__link">Profile</Link>
                         </li>
                         <li className="navbar__item">
-                            <ButtonPrimary to='/' text='Logout' onClick={logout} color='yellow' />
+                            <ButtonPrimary to='/' text='Logout' onClick={() => {
+                                logout();
+                                menuClose();
+                            }} color='yellow' />
                         </li>
                     </ul>
                 )}
