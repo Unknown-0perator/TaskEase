@@ -297,3 +297,166 @@
         line-height: 24px;
     }
 }
+
+// Offer section
+.offer-list-section {
+    margin: 24px 0;
+
+    &__heading {
+        font-size: 24px;
+        line-height: 36px;
+        color: #0A0F26;
+    }
+}
+
+.offer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #E1E1E1;
+        padding: 1rem 0;
+        gap: 1rem;
+
+        @include tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__profile {
+        @include tablet {
+            width: 65%;
+        }
+    }
+
+    &__sender {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__title {
+        color: #999999;
+        font-size: 13px;
+        font-family: "Urbanist";
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    &__info {
+        font-size: 14px;
+        font-family: "Open Sans";
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 600;
+    }
+
+    &__img-placeholder {
+        width: 36px;
+        height: 36px;
+        background-color: #E1E1E1;
+        border-radius: 50%;
+    }
+
+    &__img {}
+
+    &__member {
+        font-family: "Urbanist";
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    &__amount-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Urbanist";
+        text-align: center;
+        font-weight: 600;
+        color: #1c1c1c;
+    }
+
+    &__amount-title {
+        font-size: 14px;
+        line-height: 22px;
+
+    }
+
+    &__amount {
+        font-weight: 700;
+        font-size: 26px;
+    }
+
+    &__cta-container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        background-color: #ddd;
+        padding: 1rem;
+        border-radius: 4px;
+        gap: 1rem;
+
+        @include tablet {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+        }
+    }
+
+    &__cta-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__cta {
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: 18px;
+        font-family: "Urbanist";
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+
+
+
+        &--accept {
+            background-color: #295FCC;
+            color: #ffffff;
+
+        }
+
+        &--reject {
+            background-color: #FDD943;
+            color: #1C1C1C;
+        }
+    }
+
+}

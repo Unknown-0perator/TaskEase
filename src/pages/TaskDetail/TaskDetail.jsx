@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { displayDate } from '../../utilities/utilities';
 import { Link } from 'react-router-dom';
 import CommentList from '../../components/CommentList/CommentList';
+import OfferCard from '../../components/OfferCard/OfferCard';
 
 
 
@@ -18,10 +19,16 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const [offerErrorMessage, setOfferErrorMessage] = useState('')
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
+    const [poster, setPoster] = useState(false);
 
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
             setTaskDetail(response.data[0])
+            if (taskDetail.poster_id === profileData.user_id) {
+                setPoster(true)
+            } else {
+                setPoster(false)
+            }
         })
 
         axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
@@ -35,7 +42,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                 }
             })
         })
-    }, [API_URL, profileData.user_id, taskId])
+    }, [API_URL, profileData.user_id, taskId, poster, taskDetail.poster_id])
 
 
     const handleFormSubmit = (event) => {
@@ -165,7 +172,14 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
 
                             </div>
                         </div>
+                        {poster ? (
+                            <section className="offer-list-section">
+                                <h2 className="offer-list-section__heading">Offers</h2>
+                                <ul className="offer-list">
 
+                                </ul>
+                            </section>
+                        ) : (<></>)}
                         <CommentList isLoggedIn={isLoggedIn} profileData={profileData} API_URL={API_URL} taskId={taskId} />
 
                     </>
