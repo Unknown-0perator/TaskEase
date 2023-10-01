@@ -105,7 +105,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                     </div>
                                     <div className="task-detail__info">
                                         <p className="task-detail__title">Location</p>
-                                        <p className="task-detail__content">Remote</p>
+                                        <p className="task-detail__content">{taskDetail.type !== 'Remote' ? `${taskDetail.city}` : 'Remote'}</p>
                                     </div>
                                 </div>
                                 <div className="task-detail__group">

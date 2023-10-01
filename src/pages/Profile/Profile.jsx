@@ -2,11 +2,11 @@ import './Profile.scss';
 import profilePic from '../../assets/podmatch-GEnCnYhA1J4-unsplash.jpg';
 import { useRef, useState, useEffect } from 'react';
 import { sideBarClick } from '../../utilities/utilities';
-import Tag from '../../components/Tag/Tag';
 import { displayDate } from '../../utilities/utilities';
 import PostedTaskCard from '../../components/PostedTaskCard/PostedTaskCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ApplicationTaskCard from '../../components/ApplicationTaskCard/ApplicationTaskCard';
 
 
 
@@ -23,16 +23,17 @@ const Profile = ({ isLoggedIn, profileData, API_URL }) => {
     const sideBarLinkArray = [sideBarApplicationRef, sideBarPostTaskRef]
     const pageArray = [postedTaskRef, applicationTaskRef]
     const [userTaskList, setUserTaskList] = useState([])
+    const [applicationList, setApplicationList] = useState([])
 
 
     useEffect(() => {
         axios.get(`${API_URL}/tasks/user/${profileData.user_id}`).then(response => {
             setUserTaskList(response.data)
         })
-
-
-
-    }, [API_URL, profileData])
+        axios.get(`${API_URL}/tasks/user/${profileData.user_id}/offer`).then(response => {
+            setApplicationList(response.data)
+        })
+    }, [API_URL, profileData.user_id])
     return (
 
         <section className="profile-container margin-header">
@@ -65,13 +66,15 @@ const Profile = ({ isLoggedIn, profileData, API_URL }) => {
                 <div className="profile__task-container">
                     <ul className="profile__task-list profile__task-list--posted" ref={postedTaskRef}>
                         <h3 className="post-task__heading">Posted Tasks</h3>
-                        {userTaskList.map(task => {
-                            return (
-                                <Link className="profile__task-item" key={task.task_id}>
-                                    <PostedTaskCard task={task} API_URL={API_URL} profileData={profileData} />
-                                </Link>
-                            )
-                        })}
+
+                        {userTaskList ? (
+                            userTaskList.map(task => {
+                                return (
+                                    <Link to={`/tasks/${task.task_id}`} className="profile__task-item" key={task.task_id}>
+                                        <PostedTaskCard task={task} API_URL={API_URL} profileData={profileData} />
+                                    </Link>
+                                )
+                            })) : (<p>You haven't posted any task</p>)}
 
 
 
@@ -79,56 +82,16 @@ const Profile = ({ isLoggedIn, profileData, API_URL }) => {
 
                     <ul className="profile__task-list  profile__task-list--application post-task__container--hidden" ref={applicationTaskRef}>
                         <h3 className="post-task__heading">Applications</h3>
-                        <li className="profile__task-item">
-                            <div className="profile-task">
-                                <div className="profile-task__header">
-                                    <p className="profile-task__title">Car Detailing</p>
-                                    <Tag type='application' status='pending'></Tag>
+                        {
+                            applicationList.length !== 0 ? (
+                                applicationList.map(task => {
+                                    return (
+                                        <Link to={`/tasks/${task.task_id}`} className="profile__task-item" key={task.task_id}>
+                                            <ApplicationTaskCard task={task} />
+                                        </Link>
+                                    )
+                                })) : (<p className='task-message'>You haven't applied to any task</p>)}
 
-                                </div>
-                                <div className="profile-task__body-container">
-                                    <div className="profile-task__body">
-                                        <div className="profile-task__detail-group">
-                                            <p className="profile-task__label">Date</p>
-                                            <p className="profile-task__info">Sep 2nd 2023</p>
-                                        </div>
-                                        <div className="profile-task__detail-group">
-                                            <p className="profile-task__label">Location</p>
-                                            <p className="profile-task__info">Surrey</p>
-                                        </div>
-
-                                    </div>
-
-                                    <p className="profile-task__budget">{`CAD 150`}</p>
-
-                                </div>
-                            </div>
-                        </li>
-                        <li className="profile__task-item">
-                            <div className="profile-task">
-                                <div className="profile-task__header">
-                                    <p className="profile-task__title">Car Detailing</p>
-                                    <p className="profile-task__offer"> <span className='profile-task__offer--number'>10</span> Offers</p>
-
-                                </div>
-                                <div className="profile-task__body-container">
-                                    <div className="profile-task__body">
-                                        <div className="profile-task__detail-group">
-                                            <p className="profile-task__label">Date</p>
-                                            <p className="profile-task__info">Sep 2nd 2023</p>
-                                        </div>
-                                        <div className="profile-task__detail-group">
-                                            <p className="profile-task__label">Location</p>
-                                            <p className="profile-task__info">Surrey</p>
-                                        </div>
-
-                                    </div>
-
-                                    <p className="profile-task__budget">{`CAD 150`}</p>
-
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>

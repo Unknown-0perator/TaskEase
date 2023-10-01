@@ -16,7 +16,7 @@ const Task = ({ task, API_URL }) => {
                 </div>
                 <div className="task__detail-group">
                     <p className="task__label">Location</p>
-                    <p className="task__info">{task.location}</p>
+                    <p className="task__info">{task.city}</p>
                 </div>
                 <div className="task__detail-group">
                     <p className="task__label">Type</p>

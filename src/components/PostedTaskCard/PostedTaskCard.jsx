@@ -1,25 +1,22 @@
 import './PostedTaskCard.scss';
 import { displayDate } from '../../utilities/utilities';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const PostedTaskCard = ({ task, API_URL, profileData }) => {
+const PostedTaskCard = ({ task, API_URL }) => {
     let [offerCount, setOfferCount] = useState(0)
-    axios.get(`${API_URL}/tasks/${task.task_id}/offer`).then((response) => {
-        response.data.map(offer => {
-            if (offer.user_id === profileData.user_id) {
-                setOfferCount(offerCount++)
-            }
-            else {
-                setOfferCount(offerCount)
-            }
+    useEffect(() => {
+        axios.get(`${API_URL}/tasks/${task.task_id}/offer`).then((response) => {
+
+            setOfferCount(response.data.length)
         })
-    })
+    }, [API_URL, task.task_id])
+
     return (
         <div className="profile-task">
             <div className="profile-task__header">
                 <p className="profile-task__title">{task.title}</p>
-                <p className="profile-task__offer"> <span className='profile-task__offer--number'>{offerCount}</span> Offers</p>
+                <p className="profile-task__offer"> <span className='profile-task__offer--number'>{offerCount}</span> {offerCount === 0 || offerCount === 1 ? 'Offer' : 'Offers'}</p>
 
             </div>
             <div className="profile-task__body-container">

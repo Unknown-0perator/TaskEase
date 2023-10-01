@@ -157,4 +157,19 @@
         background-color: #F7F7F7;
         border-bottom: 1px solid #ddd;
     }
+
+    &__flex-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+    }
+}
+
+.task-message {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 14px;
+    color: #1C1C1C;
+    font-family: 'Open Sans';
 }

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { sideBarClick } from '../../utilities/utilities';
 import { useNavigate } from 'react-router-dom';
+import Popup from '../../components/Popup/Popup';
 
 const nextClick = (refArray, nextPage, sideRefArray, nextSideBar) => {
     sideRefArray.map(ref => {
@@ -35,6 +36,7 @@ const backClick = (refArray, previousPage, sideRefArray, previousSideBar) => {
 
 
 
+
 const PostTask = ({ profileData, isLoggedIn }) => {
     const navigate = useNavigate();
     useEffect(() => {
@@ -44,7 +46,12 @@ const PostTask = ({ profileData, isLoggedIn }) => {
     }, [])
 
 
+    const [showPopup, setShowPopup] = useState(false);
 
+    const handlePopup = () => {
+        setShowPopup(false)
+        navigate('/tasks')
+    }
     const titleDateRef = useRef();
     const locationRef = useRef();
     const detailRef = useRef();
@@ -74,7 +81,8 @@ const PostTask = ({ profileData, isLoggedIn }) => {
         date: '',
         time: '',
         flexible: '',
-        poster_id: ''
+        poster_id: '',
+        city: ''
     })
 
     const handleInputChange = (event) => {
@@ -92,18 +100,18 @@ const PostTask = ({ profileData, isLoggedIn }) => {
             description: taskPostForm.description,
             budget: taskPostForm.budget,
             type: type,
-            date: (taskPostForm.date ? Date.parse(taskPostForm.date) : null),
-            time: (taskPostForm.time ? Date.parse(taskPostForm.time) : null),
+            date: (taskPostForm.date ? taskPostForm.date : null),
+            time: (taskPostForm.time ? taskPostForm.time : null),
             flexible: flexibleCheckbox,
             poster_id: profileData.user_id,
-            posted_time: Date.now()
+            posted_time: Date.now(),
+            city: taskPostForm.city
         }
-        console.log(newTask)
         axios.post(`${API_URL}/tasks`, newTask).catch((e) => {
             console.log(e)
         })
 
-        alert('task created successfully')
+        setShowPopup(true)
         setTaskPostForm('')
         event.target.reset();
 
@@ -113,6 +121,9 @@ const PostTask = ({ profileData, isLoggedIn }) => {
 
     return (
         <form onSubmit={handleFormSubmit}>
+            {showPopup ? (
+                <Popup onClick={handlePopup} text='Task posted successfully' />
+            ) : (<></>)}
             <div className="post-task margin-header">
                 <div className="post-task__sidebar">
                     <ul className="post-task__sidebar__list">
@@ -149,7 +160,7 @@ const PostTask = ({ profileData, isLoggedIn }) => {
                             <label htmlFor="date" className="post-task__form__label">When do you need this done?</label>
                             <div className="post-task__form__input-container">
                                 <input disabled={flexibleCheckbox} onChange={handleInputChange} type="date" className="post-task__form__input post-task__form__input--half" name='date' min={minDate} />
-                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="time" className="post-task__form__input post-task__form__input--half" name='time' step='1800' />
+                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="time" className="post-task__form__input post-task__form__input--half" name='time' />
                             </div>
                             <OrDivider />
                             <div className="post-task__form__checkbox">
@@ -201,9 +212,9 @@ const PostTask = ({ profileData, isLoggedIn }) => {
                             </select>
                         </div>
                         <div className="post-task__form__group">
-                            <label htmlFor="task_city" className="post-task__form__label">Where do you need this done?</label>
+                            <label htmlFor="city" className="post-task__form__label">Where do you need this done?</label>
 
-                            <input disabled={remote} onChange={handleInputChange} type="text" className="post-task__form__input" placeholder='City' name='task_city' />
+                            <input disabled={remote} onChange={handleInputChange} type="text" className="post-task__form__input" placeholder='City' name='city' />
 
                             <OrDivider />
 
