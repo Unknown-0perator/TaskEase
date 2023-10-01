@@ -4,10 +4,12 @@ import { ButtonAuthentication, ButtonGoogle } from '../../components/Button/Butt
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Popup from '../../components/Popup/Popup';
 
 const SignUp = () => {
     const [checkbox, setCheckbox] = useState(true)
     let navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
 
     const [signUpForm, setSignUpForm] = useState({
         first_name: '',
@@ -15,6 +17,11 @@ const SignUp = () => {
         email: '',
         password: ''
     })
+
+    const handlePopup = () => {
+        setShowPopup(false)
+        navigate('/login')
+    }
 
     const handleInputChange = (event) => {
         setSignUpForm({
@@ -30,17 +37,19 @@ const SignUp = () => {
             last_name: signUpForm.last_name,
             email: signUpForm.email,
             password: signUpForm.password
-        }).catch((e) => {
-            console.log(e)
         })
-
-        alert('user created successfully')
+        event.target.reset();
         setSignUpForm('')
-        navigate('/')
+        setShowPopup(true);
+
     }
 
     return (
+
         <div className="authentication margin-header">
+            {showPopup ? (
+                <Popup onClick={handlePopup} text='Account created successfully' />
+            ) : (<></>)}
             <div className="authentication__container">
                 <AuthenticationHeader type='sign-up' />
                 <form className="form" onSubmit={handleFormSubmit}>

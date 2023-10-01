@@ -59,7 +59,10 @@ const PostTask = ({ profileData, isLoggedIn }) => {
     const [flexibleCheckbox, setFlexibleCheckbox] = useState(false);
     const [remote, setRemote] = useState(false)
     const [type, setType] = useState('In-Person')
+    const today = new Date().toISOString().split('T')[0];
 
+    // Use state to manage the minimum allowed date
+    const [minDate, setMinDate] = useState(today);
 
 
 
@@ -145,8 +148,8 @@ const PostTask = ({ profileData, isLoggedIn }) => {
                         <div className="post-task__form__group">
                             <label htmlFor="date" className="post-task__form__label">When do you need this done?</label>
                             <div className="post-task__form__input-container">
-                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="date" className="post-task__form__input post-task__form__input--half" name='date' />
-                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="time" className="post-task__form__input post-task__form__input--half" name='time' />
+                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="date" className="post-task__form__input post-task__form__input--half" name='date' min={minDate} />
+                                <input disabled={flexibleCheckbox} onChange={handleInputChange} type="time" className="post-task__form__input post-task__form__input--half" name='time' step='1800' />
                             </div>
                             <OrDivider />
                             <div className="post-task__form__checkbox">

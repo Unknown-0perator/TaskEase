@@ -1,0 +1,46 @@
+.popup {
+    position: fixed;
+    backdrop-filter: blur(8px);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: blur(0);
+
+    &__container {
+        background-color: #ddd;
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        border-radius: 12px;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    &__text {
+        font-family: "Urbanist";
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &__btn {
+        background-color: #FDD943;
+        color: #1C1C1C;
+        transition: all 0.2s;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: 18px;
+        font-family: "Urbanist";
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
+}

@@ -1,6 +1,7 @@
 import './OfferCard.scss';
+import { Link } from 'react-router-dom';
 
-const OfferCard = ({ userData, API_URL }) => {
+const OfferCard = ({ offer, API_URL }) => {
     return (
         <li className="offer-list__item">
             <div className="offer-list__profile">
@@ -8,16 +9,20 @@ const OfferCard = ({ userData, API_URL }) => {
                 <div className="offer-list__sender">
                     <div className="offer-list__group">
                         <p className="offer-list__title">Offer sent by</p>
-                        <div className="offer-list__user">
+                        <Link to={`user/${offer.user_id}`} className="offer-list__user">
                             <div className="offer-list__img-placeholder">
-                                {(userData.image !== "") ? (
-                                    <img src={`${API_URL}/`} alt="" className='offer-list__img' />
+                                {(offer.image !== "") ? (
+                                    <img src={`${API_URL}/${offer.image}`} alt="" className='offer-list__img' />
                                 ) : <></>}
                             </div>
-                            <p className="offer-list__info">Ahmad</p>
-                        </div>
+                            <div className="offer-list__info-container">
+                                <p className="offer-list__info">{`${offer.first_name} ${offer.last_name}`}</p>
+                                <p className="offer-list__member">Member since 2017</p>
+                            </div>
 
-                        <p className="offer-list__member">Member since 2017</p>
+                        </Link>
+
+
                     </div>
                     <div className="offer-list__group">
                         <p className="offer-list__title">Has assigned to</p>

@@ -49,7 +49,7 @@ const Profile = ({ isLoggedIn, profileData, API_URL }) => {
 
 
                         <p className="profile__location">{profileData.city}</p>
-                        <p className="profile__member">{`Member since ${displayDate(profileData.created_at)}`}</p>
+                        <p className="profile__member">{`Member since ${displayDate(profileData.timestamp)}`}</p>
                     </div>
                     <ul className="post-task__sidebar__list profile__navigation">
                         <li onClick={(e) => {

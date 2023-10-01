@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import PostTask from './pages/PostTask/PostTask';
 import Profile from './pages/Profile/Profile';
+import Popup from './components/Popup/Popup';
 
 
 
@@ -75,6 +76,7 @@ function App() {
           API_URL={API_URL}
         />} />
         <Route path='*' element={<Navigate to='/' />} />
+        <Route path='popup' element={<Popup />} />
       </Routes>
       <Footer />
     </BrowserRouter>

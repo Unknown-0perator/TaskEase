@@ -59,6 +59,13 @@
         margin-bottom: 5px;
     }
 
+    &__info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     &__info {
         font-size: 14px;
         font-family: "Open Sans";
@@ -69,6 +76,7 @@
         align-items: center;
         gap: 4px;
         font-weight: 600;
+        color: #1C1C1C;
     }
 
     &__img-placeholder {
@@ -84,6 +92,7 @@
         font-family: "Urbanist";
         font-size: 12px;
         margin-top: 5px;
+        font-weight: 400;
     }
 
     &__amount-container {

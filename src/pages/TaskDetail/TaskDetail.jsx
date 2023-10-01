@@ -20,6 +20,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
     const { taskId } = useParams();
     const [taskDetail, setTaskDetail] = useState({})
     const [poster, setPoster] = useState(false);
+    const [offerList, setOfferList] = useState([])
 
     useEffect(() => {
         axios.get(`${API_URL}/tasks/${taskId}`).then((response) => {
@@ -32,6 +33,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
         })
 
         axios.get(`${API_URL}/tasks/${taskId}/offer`).then((response) => {
+            setOfferList(response.data)
             response.data.map(offer => {
                 if (offer.user_id === profileData.user_id) {
                     setOfferDetail(offer)
@@ -96,7 +98,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                             <p className="task-detail__content">{`${taskDetail.poster_fname} ${taskDetail.poster_lname}`}</p>
                                         </div>
                                     </div>
-                                    <p className="task-detail__date">about 2 hours ago</p>
+                                    <p className="task-detail__date">{displayDate(taskDetail.posted_time)}</p>
                                 </div>
                                 <div className="task-detail__group">
                                     <div className="img__container">
@@ -136,7 +138,7 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                     <p className="offer__title">Budget</p>
                                     <p className="offer__budget">CAD {taskDetail.budget}</p>
                                 </div>
-                                {isLoggedIn ? (
+                                {isLoggedIn && !poster ? (
                                     <> {canSendOffer ? (
                                         <form className="form-offer" onSubmit={handleFormSubmit}>
                                             <input onChange={(e) => {
@@ -168,14 +170,22 @@ const TaskDetail = ({ API_URL, profileData, isLoggedIn }) => {
                                         </>
                                     )}
                                     </>
-                                ) : (<Link to='/login' className="offer__button">Login to send Offer</Link>)}
+                                ) : ((poster) ? (<Link to='/login' className="offer__button">Delete Task</Link>) : (<Link to='/login' className="offer__button">Login to send Offer</Link>))}
 
                             </div>
                         </div>
                         {poster ? (
                             <section className="offer-list-section">
-                                <h2 className="offer-list-section__heading">Offers</h2>
+                                <h2 className="offer-list-section__heading">{offerList.length === 0 ? (`There is no offer yet`) : ((offerList.length === 1) ? ('You got 1 offer') : (`You got ${offerList.length} offers`))}</h2>
                                 <ul className="offer-list">
+                                    {offerList ? (
+                                        offerList.map(offer => {
+                                            return (
+                                                <OfferCard offer={offer} />
+                                            )
+                                        })
+
+                                    ) : (<></>)}
 
                                 </ul>
                             </section>
